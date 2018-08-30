@@ -1,0 +1,56 @@
+/** BG_position_editor.css */
+
+.boardeditor input,select {
+  text-align: center;
+  font-size: 100%;
+}
+.boardeditor td {
+  text-align: center;
+}
+.deco_match{
+  color: gray;
+}
+.deco_money{
+  color: black;
+}
+
+/************************************
+フローティングウィンドウに対するCSS定義
+参考：http://ascii.jp/elem/000/000/478/478300/
+*************************************/
+#floatWindow{
+    display:none; /* 最初は非表示 */
+    position:absolute;
+    width:455px; /* 子画面のサイズ */
+    height:400px;
+    top:270px; /* 親画面の表示位置 */
+    left:400px;
+}
+#floatWindow .btngroup{
+    position:absolute; /* 閉じるボタンは右上に配置 */
+    right:10px;
+    top:3px;
+}
+#floatWindow dl{ /* 子画面の表示制御(背景:白、枠:灰色) */
+    width:100%;
+    height:100%;
+    border:solid #ccc;
+    background-color:white;
+    margin:0;
+}
+#floatWindow dl dt{ /* ラベル行(背景:灰色 マウスカーソル:移動可) */
+    height:25px;
+    line-height:25px;
+    text-indent:1em;
+    color:black;
+    font-weight:bold;
+    background:#999;
+    cursor:move;
+}
+#floatWindow dl dd{ /* データ表示 */
+    margin:0;
+    padding:10px;
+}
+#floatWindow button{ /* ボタン */
+    cursor:pointer;
+}

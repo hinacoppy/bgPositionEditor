@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Backgammon Board Editor in Browser">
+<meta name="author" content="(C)hinacoppy 2018">
+<link rel="stylesheet" href="css/BG_position_editor.css">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9598377332502198",
+    enable_page_level_ads: true
+  });
+</script>
+<title>BG Position Editor</title>
+</head>
+
+<body>
+<h3>BG Position Editor (CW) &emsp; <button id="alt-rotation">chage to CCW</button></h3>
+
+<form name="BgPositionEditor">
+<table class="boardeditor">
+<tr><td>boff-○</td><td>|</td>
+<td>24</td><td>23</td><td>22</td><td>21</td><td>20</td><td>19</td>
+<td>|</td><td>BAR-●</td><td>|</td>
+<td>18</td><td>17</td><td>16</td><td>15</td><td>14</td><td>13</td>
+<td>|</td><td>CubePos</td></tr>
+
+<tr><td></td><td>|</td>
+<td><select name="r24"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r23"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r22"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r21"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r20"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r19"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td>|</td>
+<td><select name="r25" disabled><option value="b" selected>●</option></select></td>
+<td>|</td>
+<td><select name="r18"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r17"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r16"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r15"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r14"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r13"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td>|</td><td><input type="radio" name="cubeowner" value="-1"></td></tr>
+
+<tr>
+<td><input type="number" id="boff-w" size="2" min="-99" max="99" value="15" disabled></td>
+<td>|</td>
+<td><input type="number" id="n24" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n23" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n22" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n21" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n20" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n19" size="2" min="0" max="15" value="0">
+<td>|</td>
+<td><input type="number" id="n25" size="2" min="0" max="15" value="0">
+<td>|</td>
+<td><input type="number" id="n18" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n17" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n16" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n15" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n14" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n13" size="2" min="0" max="15" value="0">
+<td>|</td><td></td></tr>
+
+<tr><td></td><td>|</td><td colspan="6"></td><td>|</td><td>BAR</td><td>|</td>
+<td colspan="6" align="center">Dice: <input type="text" id="dice" size="3" value="00">
+ &nbsp; &nbsp; &nbsp;
+CubeValue: <select name="cubevalue">
+<option value="0" selected>0</option>
+<option value="0">1</option>
+<option value="1">2</option>
+<option value="2">4</option>
+<option value="3">8</option>
+<option value="4">16</option>
+<option value="5">32</option>
+</select>
+</td>
+<td>|</td><td><input type="radio" name="cubeowner" value="0" checked></td></tr>
+
+<tr><td></td><td>|</td>
+<td><select name="r01"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r02"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r03"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r04"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r05"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r06"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td>|</td>
+<td><select name="r00" disabled><option value="w" selected>○</option></select></td>
+<td>|</td>
+<td><select name="r07"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r08"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r09"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r10"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r11"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td><select name="r12"><option value="w">○</option><option value=" " selected></option><option value="b">●</option></select></td>
+<td>|</td><td></td></tr>
+
+<tr>
+<td><input type="number" id="boff-b" size="2" min="-99" max="99" value="15" disabled></td>
+<td>|</td>
+<td><input type="number" id="n01" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n02" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n03" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n04" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n05" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n06" size="2" min="0" max="15" value="0">
+<td>|</td>
+<td><input type="number" id="n00" size="2" min="0" max="15" value="0">
+<td>|</td>
+<td><input type="number" id="n07" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n08" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n09" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n10" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n11" size="2" min="0" max="15" value="0">
+<td><input type="number" id="n12" size="2" min="0" max="15" value="0">
+<td>|</td><td><input type="radio" name="cubeowner" value="1"></td></tr>
+
+
+<tr><td>boff-●</td><td>|</td>
+<td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+<td>|</td><td>BAR-○</td><td>|</td>
+<td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
+<td>|</td><td></td></tr>
+</table>
+
+<table>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>game mode:</td><td><input type="radio" name="gamemode" value="moneygame" checked>money game</input>
+                           <input type="radio" name="gamemode" value="matchgame">match game</input></td></tr>
+<tr class="deco_match"><td>match length:</td><td><input type="number" id="matchlength" min="0" max="99" value="0"></td></tr>
+<tr class="deco_match"><td>score1(own):</td>     <td><input type="number" id="score1" min="0" max="99" value="0"></td></tr>
+<tr class="deco_match"><td>score2(opponent):</td><td><input type="number" id="score2" min="0" max="99" value="0"></td></tr>
+<tr class="deco_match"><td>crawford:</td><td><input type="radio" name="crawford" value="0" checked>no</input>
+                          <input type="radio" name="crawford" value="1">yes</input></td></tr>
+<tr class="deco_money"><td>jacoby rule:</td><td><input type="radio" name="jacoby" value="0">no jacoby,no beaver(0)</input>
+                             <input type="radio" name="jacoby" value="1">jacoby,no beaver(1)</input><br>
+                             <input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</input>
+                             <input type="radio" name="jacoby" value="3" checked>jacoby,beaver(3)</input></td></tr>
+<tr><td>turn:</td><td><input type="radio" name="turn" value="1" checked>own</input>
+                      <input type="radio" name="turn" value="-1">opponent</input></td></tr>
+<tr><td>max cube:</td><td><input type="number" id="maxcube" min="0" max="10" value="10">
+                          <span id="maxcubeval">(1024)</span></td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>xgid: <button type="button" id="clear">clear</button></td>
+    <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+</table>
+</form>
+
+<button id="apply">Apply to Editor</button>
+<button id="draw-board">Draw the Board</button>
+<a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
+<input type="button" id="copy2clip" data-clipboard-target="#xgid" value="Copy XGID to Clipboard">
+<a id="help" href="help.html" target="_blank"><button>HELP</button></a>
+<input type="hidden" id="position">
+
+<div id="floatWindow">
+  <div class="btngroup">
+    <button class="min">_</button><button class="max">O</button><button class="close">X</button>
+  </div>
+  <dl>
+    <dt>Board Image</dt>
+    <dd><img id="boardone" src=""><div id="pipinfo"></div></dd>
+  </dl>
+</div>
+
+<div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べるためのスタイル設定 -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+<script src="./js/html2canvas.min.js"></script>
+<script src="./js/bg_class.js"></script>
+<script src="./js/floatwindow.js"></script>
+<script>var boardtype='gnu-cw';</script>
+<script src="./js/BG_position_editor2.js"></script>
+</body>
+</html>
