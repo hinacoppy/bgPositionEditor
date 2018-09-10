@@ -340,3 +340,96 @@ class HtmlBoard {
     return html;
   }
 } //class HtmlBoard
+
+class GnuID {
+  constructor(xgidstr) {
+    this._xgid = new Xgid(xgidstr);
+    this._positionid = this._xgid2position(this._xgid);
+    this._matchid    = this._xgid2matchid(this._xgid);
+  }
+
+  //public mathod
+  get_gnuid() {
+    return this._positionid + ":" + this._matchid;
+  }
+
+  //以下はprivate method
+
+  //XGID(ポジション)からポジションIDを作成
+  _xgid2position(xgid) {
+    let bit = "";
+    let mx;
+    for (let p=24; p >= 0; p--) {
+      if (xgid.get_ptcol(p) == -1 && (mx = xgid.get_ptno(p)) > 0) {
+        for (let q=0; q < mx; q++, bit += "1");
+      }
+      bit += "0";
+    }
+    for (let p=1; p <= 25; p++) {
+      if (xgid.get_ptcol(p) ==  1 && (mx = xgid.get_ptno(p)) > 0) {
+        for (let q=0; q < mx; q++, bit += "1");
+      }
+      bit += "0";
+    }
+    const ary = this._bit2ary(bit);
+    const b64 = this._ary2base64(ary);
+    return b64;
+  }
+
+  //XGIDからマッチIDを作成
+  _xgid2matchid(xgid) {
+    let bit = "";
+    bit += this._reverse(("0000" + xgid.get_cube().toString(2)).substr(-4));
+    const cubepos = xgid.get_cubepos();
+    bit += (cubepos == 1 ? "10" : cubepos == -1 ? "00" : "11");
+    bit += xgid.get_turn() == 1 ? "1" : "0";
+    bit += xgid.get_crawford();
+    bit += "100";  //001 for playing a game (_reverse)
+    bit += xgid.get_turn() == 1 ? "1" : "0"; //indicates whose turn it is.
+    bit += xgid.get_dice() == "00" ? "1" : "0"; //indicates whether an doubled is being offered.
+    bit += "00";  //00 for no resignation
+    const dice1 = parseInt(xgid.get_dice_odr().substr(0,1));
+    const dice2 = parseInt(xgid.get_dice_odr().substr(1,1));
+    bit += this._reverse(("000" + dice1.toString(2)).substr(-3));
+    bit += this._reverse(("000" + dice2.toString(2)).substr(-3));
+    const sc_mc = xgid.get_matchsc();
+    const sc_me = xgid.get_sc_me();
+    const sc_yu = xgid.get_sc_yu();
+    bit += this._reverse(("000000000000000" + sc_mc.toString(2)).substr(-15));
+    bit += this._reverse(("000000000000000" + sc_yu.toString(2)).substr(-15));
+    bit += this._reverse(("000000000000000" + sc_me.toString(2)).substr(-15));
+console.log(bit);
+    const ary = this._bit2ary(bit);
+    const b64 = this._ary2base64(ary);
+    return b64;
+  }
+
+  //2進数文字列を1バイト(8ビット)ずつに区切り、バイナリデータ配列に格納
+  _bit2ary(bitstr) {
+    let ary = [];
+    while (bitstr !== "") {
+      const a = bitstr.substr(0, 8);
+      const r = this._reverse(a); //2進数文字列のエンディアン変更(ビッグ→リトル)
+      const b = parseInt(r, 2);
+      ary.push(b);
+      bitstr = bitstr.substr(8);
+    }
+    return ary;
+  }
+
+  //文字列を反転
+  _reverse(s) {
+    let r = "";
+    for (let i = s.length - 1; i >= 0; r += s[i], i--);
+    return r;
+  }
+
+  //バイナリデータ配列からBASE64文字列を作成
+  _ary2base64(ary) {
+    let binstr = "";
+    for (let i=0; i < ary.length; i++) {
+      binstr += String.fromCharCode(ary[i]);
+    }
+    return btoa(binstr).replace(/=/g, ""); //BASE64文字列を作成後、行末の = を削除
+  }
+} // class GnuID
