@@ -2,7 +2,7 @@
 // (C)hinacoppy 2018
 
 //広域変数
-var imgpath = './img/';
+var imgpath = 'img/';
 
 //入力のXGIDを解析し、結果をボードエディタ、シチュエーションエディタに反映
 function gamen_ni_hanei(xgid) {
@@ -210,6 +210,33 @@ function gamemode_css(gamemode) {
   if (gamemode == "matchgame") { $('.deco_money').css("color", "gray");  $('.deco_match').css("color", "black"); }
 }
 
+//AJAXエラー時のメッセージ
+function disp_error() {
+  $("#result").text("Error: AJAX connection failed");
+}
+
+//結果を<pre>で表示
+function disp_result_pre(d) {
+  $("#result").text(d);
+}
+
+//AJAX通信により、gnubgによる解析結果を取得する
+function get_gnuanalysis_ajax(gnuid, depth) {
+  $("#result").html("<img src='img/loading.gif'>");
+  $.ajax({
+//    url: 'gnubg_ajax.php?g='+gnuid+'&d='+depth, //local PHP script
+//    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+gnuid,
+    url: 'http://local.example.com:1234/gnubg_ajax.js?g='+gnuid, //Node.js
+    method: 'GET',
+    dataType : "text",
+  }).done(function(d) {
+    disp_result_pre(d);
+  }).fail(function() {
+    disp_error();
+//    alert('データ取得に失敗しました');
+  });
+}
+
 //イベントハンドラの定義
 $(function() {
 
@@ -242,8 +269,8 @@ $(function() {
     $('#maxcubeval').text(get_maxcubevaltext(maxcube));
   });
 
-  //[Copy to Clip] ボタンがクリックされたとき
-  const clipboard = new Clipboard('#copy2clip');
+  //[XGID to Clipboard] ボタンがクリックされたとき
+  const clipboard = new ClipboardJS('#copy2clip');
   clipboard.on('success', function(e) {
     e.clearSelection();
   });
@@ -269,10 +296,18 @@ $(function() {
   //HTMLファイル読み込み時にXGIDがクエリが設定されていれば読み込み、画面に反映する
   $(window).on('load',function(){
     const ref = $(location).attr('search');
-    const xgid = ref.slice(ref.indexOf('&t=XGID', 0)+4); //手抜きのクエリ判定
+    let xgid = ref.slice(ref.indexOf('&t=XGID', 0)+4); //手抜きのクエリ判定
+    if (xgid === "") { xgid = "XGID=--------------------------:0:0:1:00:0:0:0:0:10";}
     $('#xgid').val(xgid);
     gamen_ni_hanei(xgid); //XGIDをエディタに反映
     js_getboard(xgid,boardtype,imgpath); //ボード画像を作成
+  });
+
+  //[Analyse] ボタンがクリックされたとき
+  $('#analyse').on('click', function(e) {
+    const xgid = $("#xgid").val();
+    const depth = $("[name=depth]").val();
+    get_gnuanalysis_ajax(xgid, depth);
   });
 
 }); //close to $(function() {

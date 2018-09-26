@@ -135,6 +135,11 @@ CubeValue: <select name="cubevalue">
                       <input type="radio" name="turn" value="-1">opponent</input></td></tr>
 <tr><td>max cube:</td><td><input type="number" id="maxcube" min="0" max="10" value="10">
                           <span id="maxcubeval">(1024)</span></td></tr>
+<tr><td>analysis depth:</td><td><select name="depth">
+                          <option value="1">1</option>
+                          <option value="2" selected>2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option></select></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>xgid: <button type="button" id="clear">clear</button></td>
     <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
@@ -145,9 +150,12 @@ CubeValue: <select name="cubevalue">
 <button id="apply">Apply to Editor</button>
 <button id="draw-board">Draw the Board</button>
 <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
-<input type="button" id="copy2clip" data-clipboard-target="#xgid" value="Copy XGID to Clipboard">
-<a id="help" href="help.html" target="_blank"><button>HELP</button></a>
+<input type="button" id="copy2clip" data-clipboard-target="#xgid" value="XGID to Clipboard">
+<button id="analyse">Analyse</button>
 <input type="hidden" id="position">
+<br>---------------------------------------------------------------<br>
+<pre><div id="result"></div></pre>
+<div id="loading"></div>
 
 <div id="floatWindow">
   <div class="btngroup">
@@ -161,9 +169,9 @@ CubeValue: <select name="cubevalue">
 
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べるためのスタイル設定 -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
-<script src="./js/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
 <script src="./js/bg_class.js"></script>
 <script src="./js/floatwindow.js"></script>
 <script>var boardtype='gnu-cw';</script>
