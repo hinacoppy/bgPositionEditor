@@ -226,7 +226,7 @@ function get_gnuanalysis_ajax(gnuid, depth) {
   $.ajax({
 //    url: 'gnubg_ajax.php?g='+gnuid+'&d='+depth, //local PHP script
 //    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+gnuid,
-    url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+gnuid, //Node.js
+    url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+gnuid+'&d='+depth, //Node.js
     method: 'GET',
     dataType : "text",
   }).done(function(d) {
