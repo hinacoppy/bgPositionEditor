@@ -1,0 +1,74 @@
+/** BG_position_editor.css */
+
+.boardeditor input,select {
+  text-align: center;
+  font-size: 100%;
+}
+.boardeditor td {
+  text-align: center;
+}
+.deco_match{
+  color: gray;
+}
+.deco_money{
+  color: black;
+}
+.rotation_rev{
+  display:none; /* 初期設定はCW(fwd)で手前側の手番。なのでこれは非表示 */
+}
+.turn1{
+  display:none; /* 同上 */
+}
+/************************************
+フローティングウィンドウに対するCSS定義
+参考：http://ascii.jp/elem/000/000/478/478300/
+*************************************/
+#floatWindow{
+/*    display:none; /* 最初は非表示 */
+/*    position:absolute; */
+    width:455px; /* 子画面のサイズ */
+    height:430px;
+    top:340px; /* 親画面の表示位置 */
+    left:400px;
+}
+
+#floatWindow2{
+/*    display:none; /* 最初は非表示 */
+/*    position:absolute;*/
+    width:540px; /* 子画面のサイズ */ /*サイズと位置はjsの方で定義する*/
+    height:270px;
+    top:340px; /* 親画面の表示位置 */
+    left:80px;
+}
+.floatwindow{
+    display:none; /* 最初は非表示 */
+    position:absolute;
+}
+.floatwindow .btngroup{
+    position:absolute; /* 閉じるボタンは右上に配置 */
+    right:10px;
+    top:3px;
+}
+.floatwindow dl{ /* 子画面の表示制御(背景:白、枠:灰色) */
+    width:100%;
+    height:100%;
+    border:solid #ccc;
+    background-color:#eff;
+    margin:0;
+}
+.floatwindow dl dt{ /* ラベル行(背景:灰色 マウスカーソル:移動可) */
+    height:25px;
+    line-height:25px;
+    text-indent:1em;
+    color:black;
+    font-weight:bold;
+    background:#999;
+    cursor:move;
+}
+.floatwindow dl dd{ /* データ表示 */
+    margin:0;
+    padding:10px;
+}
+.floatwindow button{ /* ボタン */
+    cursor:pointer;
+}
