@@ -33,7 +33,7 @@
 <td><button class="updn" id="b20uf">●</button><button class="updn" id="b20df">○</button></td>
 <td><button class="updn" id="b19uf">●</button><button class="updn" id="b19df">○</button></td>
 <td>|</td>
-<td><button class="updn" id="b00uf">↑</button><button class="updn" id="b00df">○</button></td>
+<td><button class="updn" id="b00uf">-</button><button class="updn" id="b00df">○</button></td>
 <td>|</td>
 <td><button class="updn" id="b18uf">●</button><button class="updn" id="b18df">○</button></td>
 <td><button class="updn" id="b17uf">●</button><button class="updn" id="b17df">○</button></td>
@@ -97,7 +97,7 @@
 <td><button class="updn" id="b05uf">●</button><button class="updn" id="b05df">○</button></td>
 <td><button class="updn" id="b06uf">●</button><button class="updn" id="b06df">○</button></td>
 <td>|</td>
-<td><button class="updn" id="b25df">↓</button><button class="updn" id="b25uf">●</button></td>
+<td><button class="updn" id="b25df">-</button><button class="updn" id="b25uf">●</button></td>
 <td>|</td>
 <td><button class="updn" id="b07uf">●</button><button class="updn" id="b07df">○</button></td>
 <td><button class="updn" id="b08uf">●</button><button class="updn" id="b08df">○</button></td>
@@ -135,7 +135,7 @@
 <td><button class="updn" id="b17ur">●</button><button class="updn" id="b17dr">○</button></td>
 <td><button class="updn" id="b18ur">●</button><button class="updn" id="b18dr">○</button></td>
 <td>|</td>
-<td><button class="updn" id="b00ur">↑</button><button class="updn" id="b00dr">○</button></td>
+<td><button class="updn" id="b00ur">-</button><button class="updn" id="b00dr">○</button></td>
 <td>|</td>
 <td><button class="updn" id="b19ur">●</button><button class="updn" id="b19dr">○</button></td>
 <td><button class="updn" id="b20ur">●</button><button class="updn" id="b20dr">○</button></td>
@@ -200,7 +200,7 @@
 <td><button class="updn" id="b08ur">●</button><button class="updn" id="b08dr">○</button></td>
 <td><button class="updn" id="b07ur">●</button><button class="updn" id="b07dr">○</button></td>
 <td>|</td>
-<td><button class="updn" id="b25dr">↓</button><button class="updn" id="b25ur">●</button></td>
+<td><button class="updn" id="b25dr">-</button><button class="updn" id="b25ur">●</button></td>
 <td>|</td>
 <td><button class="updn" id="b06ur">●</button><button class="updn" id="b06dr">○</button></td>
 <td><button class="updn" id="b05ur">●</button><button class="updn" id="b05dr">○</button></td>
@@ -236,26 +236,32 @@ cube value: <select name="cubevalue">
 
 <table>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>game mode:</td><td><label><input type="radio" name="gamemode" value="moneygame" checked>money game</label>
-                           <label><input type="radio" name="gamemode" value="matchgame">match game</label></td></tr>
+<tr><td>game mode:</td>
+  <td><label><input type="radio" name="gamemode" value="moneygame" checked>money game</label>
+      <label><input type="radio" name="gamemode" value="matchgame">match game</label></td></tr>
 <tr class="deco_match"><td>match length:</td><td><input type="number" id="matchlength" min="0" max="99" value="0"></td></tr>
 <tr class="deco_match"><td>score1(own):</td>     <td><input type="number" id="score1" min="0" max="99" value="0"></td></tr>
 <tr class="deco_match"><td>score2(opponent):</td><td><input type="number" id="score2" min="0" max="99" value="0"></td></tr>
-<tr class="deco_match"><td>crawford:</td><td><label><input type="radio" name="crawford" value="0" checked>no</label>
-                          <label><input type="radio" name="crawford" value="1">yes</label></td></tr>
-<tr class="deco_money"><td>jacoby rule:</td><td><label><input type="radio" name="jacoby" value="0">no jacoby,no beaver(0)</label>
-                             <label><input type="radio" name="jacoby" value="1">jacoby,no beaver(1)</label><br>
-                             <label><input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</label>
-                             <label><input type="radio" name="jacoby" value="3" checked>jacoby,beaver(3)</label></td></tr>
-<tr><td>turn:</td><td><label><input type="radio" name="turn" value="1" checked>own</label>
-                      <label><input type="radio" name="turn" value="-1">opponent</label></td></tr>
-<tr><td>max cube:</td><td><input type="number" id="maxcube" min="0" max="10" value="10">
-                          <span id="maxcubeval">(1024)</span></td></tr>
-<tr><td>analysis depth:</td><td><select name="depth">
-                          <option value="1">1</option>
-                          <option value="2" selected>2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option></select></td></tr>
+<tr class="deco_match"><td>crawford:</td>
+  <td><label><input type="radio" name="crawford" value="0" checked>no</label>
+      <label><input type="radio" name="crawford" value="1">yes</label></td></tr>
+<tr class="deco_money"><td>jacoby rule:</td>
+  <td><label><input type="radio" name="jacoby" value="0">no jacoby,no beaver(0)</label>
+      <label><input type="radio" name="jacoby" value="1">jacoby,no beaver(1)</label><br>
+      <label><input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</label>
+      <label><input type="radio" name="jacoby" value="3" checked>jacoby,beaver(3)</label></td></tr>
+<tr><td>turn:</td>
+  <td><label><input type="radio" name="turn" value="1" checked>own</label>
+      <label><input type="radio" name="turn" value="-1">opponent</label></td></tr>
+<tr><td>max cube:</td>
+  <td><input type="number" id="maxcube" min="0" max="10" value="10">
+      <span id="maxcubeval">(1024)</span></td></tr>
+<tr><td>analysis depth:</td>
+  <td><select name="depth">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option></select></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>xgid: <button type="button" id="clear">clear</button></td>
     <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10">
@@ -267,28 +273,27 @@ cube value: <select name="cubevalue">
 <input type="hidden" id="position" value="--------------------------">
 </form>
 
-
-<div id="floatWindow2" class="floatwindow">
-  <div class="btngroup">
-    <button class="min">_</button><button class="max">O</button><button class="close">X</button>
+<section id="analysisResult" class="modalArea">
+  <div class="modalContents">
+    <h3 class="modalTitleContainer">
+      <span class="modalTitle">Analysis Result</span>
+      <button id="closeResult" class="closeModal">×</button>
+    </h3>
+    <pre id="result"></pre>
   </div>
-  <dl>
-    <dt>Analysis Result</dt>
-    <dd><div id="loading"></div><pre id="result"></pre></dd>
-  </dl>
-</div>
+</section>
 
-<div id="floatWindow" class="floatwindow">
-  <div class="btngroup">
-    <button class="min">_</button><button class="max">O</button><button class="close">X</button>
+<section id="boardImg" class="modalArea">
+  <div class="modalContents">
+    <h3 class="modalTitleContainer">
+      <span class="modalTitle">Board Image</span>
+      <button id="closeImg" class="closeModal">×</button>
+    </h3>
+    <img id="boardone" src="">
+    <div id="pipinfo"></div>
+    <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
   </div>
-  <dl>
-    <dt>Board Image</dt>
-    <dd><img id="boardone" src=""><div id="pipinfo"></div>
-        <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
-    </dd>
-  </dl>
-</div>
+</section>
 
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べるためのスタイル設定 -->
 
@@ -296,7 +301,6 @@ cube value: <select name="cubevalue">
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
 <script src="./js/bg_class.js"></script>
-<script src="./js/floatwindow.js"></script>
 <script src="./js/BG_position_editor3.js"></script>
 </body>
 </html>

@@ -2,8 +2,10 @@
 // (C)hinacoppy 2018
 
 //広域変数
-var imgpath = './img/gnu/';
+var imgpath = 'img/bw/';
 var boardtype = 'gnu-cw';
+var durty_analysis = true;
+var durty_drawboard = true;
 
 //入力のXGIDを解析し、結果をボードエディタ、シチュエーションエディタに反映
 function gamen_ni_hanei(xgid) {
@@ -102,7 +104,6 @@ function position_ni_hanei(position) {
   const poslist = position.split('');
   for (let i=0; i<poslist.length; i++) {
     const ch = poslist[i];
-//    const n = char2num(ch);
     const pt = ("00"+i).substr(-2);
     const str = make_pt_str(i, ch);
     $('#p'+pt+'f').html(str);
@@ -171,8 +172,7 @@ function edit_position(id) {
   poslist[pt] = chnew;
   const nextpos = poslist.join('');
 
-console.log(position, delta, num, chnew, nextpos);
-  $('#position').val(nextpos).change(); //XGIDを編集するためにチェンジイベントを発火
+  $('#position').val(nextpos).change(); //XGIDを編集するためにchangeイベントを発火
 
   const str = make_pt_str(pt, chnew);
   const pts = ("00"+pt).substr(-2);
@@ -262,9 +262,9 @@ function js_getboard(xgid, boardtype, imgpath) {
   const bdwidth = html.get_bdwidth();
   $('#bgboard').show().html(bgboard).css("width", bdwidth);
   $('#pipinfo').text(pipinfo);
-  $("#floatWindow").css({width:455, height:430, top:320, left:600}).fadeIn("fast");
   draw_canvas();
   setTimeout(function(){ $('#bgboard').hide(); }, 500); //draw_canvas()が終わったころに非表示にする
+  durty_drawboard = false;
 }
 
 //html2canvasコマンドでHTML画像を一つのpng画像にまとめる
@@ -304,9 +304,9 @@ function get_gnuanalysis_ajax(gnuid, depth) {
     dataType : "text",
   }).done(function(d) {
     disp_result_pre(d);
+    durty_analysis = false;
   }).fail(function() {
     disp_error();
-//    alert('データ取得に失敗しました');
   });
 }
 
@@ -345,13 +345,21 @@ $(function() {
     if (e.target.id != "xgid") {
       const xgid = xgidout_wo_kumitate();
       $('#xgid').val(xgid);
+      durty_analysis = durty_drawboard = true;
     }
   });
 
   //[Draw the Board] ボタンがクリックされたとき(CW)
   $('#draw-board').on('click', function(e) {
-    const xgid = $('#xgid').val();
-    js_getboard(xgid, boardtype, imgpath); //boardtype,imgpathは広域変数から取得
+    if (durty_drawboard) {
+      const xgid = $('#xgid').val();
+      js_getboard(xgid, boardtype, imgpath); //boardtype,imgpathは広域変数から取得
+    }
+    $('#boardImg').fadeIn();
+  });
+  //閉じるボタンクリック
+  $('#closeImg').on('click', function(){
+    $('#boardImg').fadeOut();
   });
 
   //max cubeが変更されたときは倍率(キューブバリュー)を変更する
@@ -405,10 +413,16 @@ $(function() {
 
   //[Analyse] ボタンがクリックされたとき
   $('#analyse').on('click', function(e) {
-    const xgid = $("#xgid").val();
-    const depth = $("[name=depth]").val();
-    $("#floatWindow2").css({width:540, height:270, top:340, left:80}).fadeIn("fast");
-    get_gnuanalysis_ajax(xgid, depth);
+    if (durty_analysis) {
+      const xgid = $("#xgid").val();
+      const depth = $("[name=depth]").val();
+      get_gnuanalysis_ajax(xgid, depth);
+    }
+    $('#analysisResult').fadeIn();
+  });
+  //閉じるボタンクリック
+  $('#closeResult').on('click', function(e) {
+    $('#analysisResult').fadeOut();
   });
 
 }); //close to $(function() {
