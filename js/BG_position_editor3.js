@@ -322,6 +322,7 @@ $(function() {
   $('#apply').on('click', function(e) {
     const xgid = $('#xgid').val();
     gamen_ni_hanei(xgid);
+    durty_analysis = durty_drawboard = true;
   });
 
   //キューブ状態が変更されたときはキューブを表示する
@@ -418,6 +419,7 @@ $(function() {
       const depth = $("[name=depth]").val();
       get_gnuanalysis_ajax(xgid, depth);
     }
+    $('#analysisResult > .modalContents').css("max-width", "none");
     $('#analysisResult').fadeIn();
   });
   //閉じるボタンクリック
