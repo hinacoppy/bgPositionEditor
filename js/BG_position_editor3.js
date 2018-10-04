@@ -16,7 +16,7 @@ function gamen_ni_hanei(xgid) {
         sc1=z[6], sc2=z[7], jacoby=crawford=z[8], matchlen=z[9], maxcube=z[10];
   let gamemode;
 
-  $('#xgid').val(xgid);
+  $('#xgid').val(xgidstr);
   $('#matchlength').val(matchlen);
   $('#score1').val(sc1);
   $('#score2').val(sc2);
@@ -425,6 +425,12 @@ $(function() {
   //閉じるボタンクリック
   $('#closeResult').on('click', function(e) {
     $('#analysisResult').fadeOut();
+  });
+
+  //[Clear Board] ボタンがクリックされたとき
+  $('#clearboard').on('click', function(e) {
+    gamen_ni_hanei(false);
+    durty_analysis = durty_drawboard = true;
   });
 
 }); //close to $(function() {
