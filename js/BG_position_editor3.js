@@ -410,6 +410,7 @@ $(function() {
       boardtype = 'gnu-cw'
       break;
     }
+    durty_drawboard = true;
   });
 
   //[Analyse] ボタンがクリックされたとき
