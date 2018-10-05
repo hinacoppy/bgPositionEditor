@@ -123,7 +123,7 @@ function check_jb_cf() {
 
 //maxcubeのキューブバリューを計算する
 function get_cubevaltext(cube) {
-  return Math.pow(2, cube); 
+  return Math.pow(2, cube);
 }
 
 //ベアオフの数を計算・表示する。負数の場合は警告(赤文字)
@@ -299,6 +299,7 @@ function get_gnuanalysis_ajax(gnuid, depth) {
 //    url: 'gnubg_ajax.php?g='+gnuid+'&d='+depth, //local PHP script
 //    url: 'http://local.example.com:1234/gnubg_ajax.js?g='+gnuid, //Node.js
 //    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+gnuid,
+//    url: '/cgi-bin/gnubg_ajax.cgi?g='+gnuid+'&d='+depth, //kagoya local
     url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+gnuid+'&d='+depth, //Node.js
     method: 'GET',
     dataType : "text",
@@ -333,7 +334,6 @@ $(function() {
     const crawford = $('[name=crawford]:checked').val();
     cube_wo_hyoji(cubeown, cubeval, gamemode, crawford);
   });
-
 
   //turnが変更されたとき
   $('[name=turn]').on('change', function(e) {

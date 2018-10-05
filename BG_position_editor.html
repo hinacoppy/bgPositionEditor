@@ -12,7 +12,6 @@
 <button id="alt-rotation">Change rotation</button> &nbsp;
 <button id="analyse">Analyse</button> &nbsp;
 <button id="draw-board">Draw the Board</button> &nbsp;
-<button id="clearboard">Clear Board</button>
 </h3>
 
 <form id="BgEditor" onSubmit="return false;">
@@ -98,7 +97,7 @@
 <td><button class="updn" id="b05uf">●</button><button class="updn" id="b05df">○</button></td>
 <td><button class="updn" id="b06uf">●</button><button class="updn" id="b06df">○</button></td>
 <td>|</td>
-<td><button class="updn" id="b25df">-</button><button class="updn" id="b25uf">●</button></td>
+<td><button class="updn" id="b25uf">●</button><button class="updn" id="b25df">-</button></td>
 <td>|</td>
 <td><button class="updn" id="b07uf">●</button><button class="updn" id="b07df">○</button></td>
 <td><button class="updn" id="b08uf">●</button><button class="updn" id="b08df">○</button></td>
@@ -201,7 +200,7 @@
 <td><button class="updn" id="b08ur">●</button><button class="updn" id="b08dr">○</button></td>
 <td><button class="updn" id="b07ur">●</button><button class="updn" id="b07dr">○</button></td>
 <td>|</td>
-<td><button class="updn" id="b25dr">-</button><button class="updn" id="b25ur">●</button></td>
+<td><button class="updn" id="b25ur">●</button><button class="updn" id="b25dr">-</button></td>
 <td>|</td>
 <td><button class="updn" id="b06ur">●</button><button class="updn" id="b06dr">○</button></td>
 <td><button class="updn" id="b05ur">●</button><button class="updn" id="b05dr">○</button></td>
@@ -268,6 +267,7 @@ cube value: <select name="cubevalue">
     <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10">
 <button id="apply">Apply to Editor</button>
 <input type="button" id="copy2clip" data-clipboard-target="#xgid" value="XGID to Clipboard">
+<button id="clearboard">Clear Board</button>
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 </table>
@@ -296,7 +296,7 @@ cube value: <select name="cubevalue">
   </div>
 </section>
 
-<div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べるためのスタイル設定 -->
+<div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
