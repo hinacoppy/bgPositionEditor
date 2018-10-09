@@ -7,6 +7,18 @@
 .boardeditor td{
   text-align: center;
 }
+.boardeditor{
+  background-color: #eee;
+}
+.bgc1{
+  background-color: #fef;
+}
+.bgc2{
+  background-color: #eff;
+}
+.bgc3{
+  background-color: #fff;
+}
 .deco_match{
   color: gray;
 }

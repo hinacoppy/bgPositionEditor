@@ -15,208 +15,312 @@
 </h3>
 
 <form id="BgEditor" onSubmit="return false;">
-<table class="rotation_fwd boardeditor">
+<table class="rotation_fwd boardeditor" border="3" rules="cols">
 <tr align="center" class="turn0">
-<td>b-off</td><td></td><td>24</td><td>23</td><td>22</td><td>21</td><td>20</td><td>19</td><td></td><td>bar</td><td></td>
-<td>18</td><td>17</td><td>16</td><td>15</td><td>14</td><td>13</td><td></td><td>Cube</td>
+<td>b-off</td><td></td>
+<td class="bgc1">24</td>
+<td class="bgc2">23</td>
+<td class="bgc1">22</td>
+<td class="bgc2">21</td>
+<td class="bgc1">20</td>
+<td class="bgc2">19</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc1">18</td>
+<td class="bgc2">17</td>
+<td class="bgc1">16</td>
+<td class="bgc2">15</td>
+<td class="bgc1">14</td>
+<td class="bgc2">13</td>
+<td></td><td>Cube</td>
 </tr>
 <tr align="center" class="turn1">
-<td>b-off</td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td></td><td>bar</td><td></td>
-<td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td></td><td>Cube</td>
+<td>b-off</td><td></td>
+<td class="bgc1">1</td>
+<td class="bgc2">2</td>
+<td class="bgc1">3</td>
+<td class="bgc2">4</td>
+<td class="bgc1">5</td>
+<td class="bgc2">6</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc1">7</td>
+<td class="bgc2">8</td>
+<td class="bgc1">9</td>
+<td class="bgc2">10</td>
+<td class="bgc1">11</td>
+<td class="bgc2">12</td>
+<td></td><td>Cube</td>
 </tr>
 <tr align="center">
-<td>○</td><td>|</td>
-<td><button class="updn" id="b24uf">●</button><button class="updn" id="b24df">○</button></td>
-<td><button class="updn" id="b23uf">●</button><button class="updn" id="b23df">○</button></td>
-<td><button class="updn" id="b22uf">●</button><button class="updn" id="b22df">○</button></td>
-<td><button class="updn" id="b21uf">●</button><button class="updn" id="b21df">○</button></td>
-<td><button class="updn" id="b20uf">●</button><button class="updn" id="b20df">○</button></td>
-<td><button class="updn" id="b19uf">●</button><button class="updn" id="b19df">○</button></td>
-<td>|</td>
+<td>○</td><td></td>
+<td class="bgc1"><button class="updn" id="b24uf">●</button><button class="updn" id="b24df">○</button></td>
+<td class="bgc2"><button class="updn" id="b23uf">●</button><button class="updn" id="b23df">○</button></td>
+<td class="bgc1"><button class="updn" id="b22uf">●</button><button class="updn" id="b22df">○</button></td>
+<td class="bgc2"><button class="updn" id="b21uf">●</button><button class="updn" id="b21df">○</button></td>
+<td class="bgc1"><button class="updn" id="b20uf">●</button><button class="updn" id="b20df">○</button></td>
+<td class="bgc2"><button class="updn" id="b19uf">●</button><button class="updn" id="b19df">○</button></td>
+<td></td>
 <td><button class="updn" id="b00uf">-</button><button class="updn" id="b00df">○</button></td>
-<td>|</td>
-<td><button class="updn" id="b18uf">●</button><button class="updn" id="b18df">○</button></td>
-<td><button class="updn" id="b17uf">●</button><button class="updn" id="b17df">○</button></td>
-<td><button class="updn" id="b16uf">●</button><button class="updn" id="b16df">○</button></td>
-<td><button class="updn" id="b15uf">●</button><button class="updn" id="b15df">○</button></td>
-<td><button class="updn" id="b14uf">●</button><button class="updn" id="b14df">○</button></td>
-<td><button class="updn" id="b13uf">●</button><button class="updn" id="b13df">○</button></td>
-<td>|</td><td></td>
+<td></td>
+<td class="bgc1"><button class="updn" id="b18uf">●</button><button class="updn" id="b18df">○</button></td>
+<td class="bgc2"><button class="updn" id="b17uf">●</button><button class="updn" id="b17df">○</button></td>
+<td class="bgc1"><button class="updn" id="b16uf">●</button><button class="updn" id="b16df">○</button></td>
+<td class="bgc2"><button class="updn" id="b15uf">●</button><button class="updn" id="b15df">○</button></td>
+<td class="bgc1"><button class="updn" id="b14uf">●</button><button class="updn" id="b14df">○</button></td>
+<td class="bgc2"><button class="updn" id="b13uf">●</button><button class="updn" id="b13df">○</button></td>
+<td></td><td></td>
 </tr>
 <tr valign="top" align="center">
 <td id="boff-wf">0</td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p24f"></td>
-<td id="p23f"></td>
-<td id="p22f"></td>
-<td id="p21f"></td>
-<td id="p20f"></td>
-<td id="p19f"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p24f" class="bgc1"></td>
+<td id="p23f" class="bgc2"></td>
+<td id="p22f" class="bgc1"></td>
+<td id="p21f" class="bgc2"></td>
+<td id="p20f" class="bgc1"></td>
+<td id="p19f" class="bgc2"></td>
+<td><br><br><br><br><br></td>
 <td id="p00f"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p18f"></td>
-<td id="p17f"></td>
-<td id="p16f"></td>
-<td id="p15f"></td>
-<td id="p14f"></td>
-<td id="p13f"></td>
-<td>|<br>|<br>|<br>|<br>|</td><td id="cubef" rowspan="3"></td>
+<td><br><br><br><br><br></td>
+<td id="p18f" class="bgc1"></td>
+<td id="p17f" class="bgc2"></td>
+<td id="p16f" class="bgc1"></td>
+<td id="p15f" class="bgc2"></td>
+<td id="p14f" class="bgc1"></td>
+<td id="p13f" class="bgc2"></td>
+<td><br><br><br><br><br></td><td id="cubef" rowspan="3"></td>
 </tr>
 <tr align="center">
-<td></td><td>|</td><td colspan="6"></td><td>|</td><td></td><td>|</td>
-<td colspan="6" align="center">Dice: <input type="text" id="dicef" size="3" value="00" text-align="center">
-</td><td>|</td>
+<td></td><td></td><td colspan="6" class="bgc3"></td><td></td><td></td><td></td>
+<td colspan="6" align="center" class="bgc3">Dice: <input type="text" id="dicef" size="3" value="00" text-align="center">
+</td><td></td>
 </tr>
 <tr valign="bottom" align="center">
 <td id="boff-bf">0</td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p01f"></td>
-<td id="p02f"></td>
-<td id="p03f"></td>
-<td id="p04f"></td>
-<td id="p05f"></td>
-<td id="p06f"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p01f" class="bgc2"></td>
+<td id="p02f" class="bgc1"></td>
+<td id="p03f" class="bgc2"></td>
+<td id="p04f" class="bgc1"></td>
+<td id="p05f" class="bgc2"></td>
+<td id="p06f" class="bgc1"></td>
+<td><br><br><br><br><br></td>
 <td id="p25f"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p07f"></td>
-<td id="p08f"></td>
-<td id="p09f"></td>
-<td id="p10f"></td>
-<td id="p11f"></td>
-<td id="p12f"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p07f" class="bgc2"></td>
+<td id="p08f" class="bgc1"></td>
+<td id="p09f" class="bgc2"></td>
+<td id="p10f" class="bgc1"></td>
+<td id="p11f" class="bgc2"></td>
+<td id="p12f" class="bgc1"></td>
+<td><br><br><br><br><br></td>
 </tr>
 <tr align="center">
-<td>●</td><td>|</td>
-<td><button class="updn" id="b01uf">●</button><button class="updn" id="b01df">○</button></td>
-<td><button class="updn" id="b02uf">●</button><button class="updn" id="b02df">○</button></td>
-<td><button class="updn" id="b03uf">●</button><button class="updn" id="b03df">○</button></td>
-<td><button class="updn" id="b04uf">●</button><button class="updn" id="b04df">○</button></td>
-<td><button class="updn" id="b05uf">●</button><button class="updn" id="b05df">○</button></td>
-<td><button class="updn" id="b06uf">●</button><button class="updn" id="b06df">○</button></td>
-<td>|</td>
+<td>●</td><td></td>
+<td class="bgc2"><button class="updn" id="b01uf">●</button><button class="updn" id="b01df">○</button></td>
+<td class="bgc1"><button class="updn" id="b02uf">●</button><button class="updn" id="b02df">○</button></td>
+<td class="bgc2"><button class="updn" id="b03uf">●</button><button class="updn" id="b03df">○</button></td>
+<td class="bgc1"><button class="updn" id="b04uf">●</button><button class="updn" id="b04df">○</button></td>
+<td class="bgc2"><button class="updn" id="b05uf">●</button><button class="updn" id="b05df">○</button></td>
+<td class="bgc1"><button class="updn" id="b06uf">●</button><button class="updn" id="b06df">○</button></td>
+<td></td>
 <td><button class="updn" id="b25uf">●</button><button class="updn" id="b25df">-</button></td>
-<td>|</td>
-<td><button class="updn" id="b07uf">●</button><button class="updn" id="b07df">○</button></td>
-<td><button class="updn" id="b08uf">●</button><button class="updn" id="b08df">○</button></td>
-<td><button class="updn" id="b09uf">●</button><button class="updn" id="b09df">○</button></td>
-<td><button class="updn" id="b10uf">●</button><button class="updn" id="b10df">○</button></td>
-<td><button class="updn" id="b11uf">●</button><button class="updn" id="b11df">○</button></td>
-<td><button class="updn" id="b12uf">●</button><button class="updn" id="b12df">○</button></td>
-<td>|</td><td></td>
+<td></td>
+<td class="bgc2"><button class="updn" id="b07uf">●</button><button class="updn" id="b07df">○</button></td>
+<td class="bgc1"><button class="updn" id="b08uf">●</button><button class="updn" id="b08df">○</button></td>
+<td class="bgc2"><button class="updn" id="b09uf">●</button><button class="updn" id="b09df">○</button></td>
+<td class="bgc1"><button class="updn" id="b10uf">●</button><button class="updn" id="b10df">○</button></td>
+<td class="bgc2"><button class="updn" id="b11uf">●</button><button class="updn" id="b11df">○</button></td>
+<td class="bgc1"><button class="updn" id="b12uf">●</button><button class="updn" id="b12df">○</button></td>
+<td></td><td></td>
 </tr>
 <tr align="center" class="turn0">
-<td>b-off</td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td></td><td>bar</td><td></td>
-<td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td></td><td></td>
+<td>b-off</td><td></td>
+<td class="bgc2">1</td>
+<td class="bgc1">2</td>
+<td class="bgc2">3</td>
+<td class="bgc1">4</td>
+<td class="bgc2">5</td>
+<td class="bgc1">6</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc2">7</td>
+<td class="bgc1">8</td>
+<td class="bgc2">9</td>
+<td class="bgc1">10</td>
+<td class="bgc2">11</td>
+<td class="bgc1">12</td>
+<td></td><td></td>
 </tr>
 <tr align="center" class="turn1">
-<td>b-off</td><td></td><td>24</td><td>23</td><td>22</td><td>21</td><td>20</td><td>19</td><td></td><td>bar</td><td></td>
-<td>18</td><td>17</td><td>16</td><td>15</td><td>14</td><td>13</td><td></td><td></td>
+<td>b-off</td><td></td>
+<td class="bgc2">24</td>
+<td class="bgc1">23</td>
+<td class="bgc2">22</td>
+<td class="bgc1">21</td>
+<td class="bgc2">20</td>
+<td class="bgc1">19</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc2">18</td>
+<td class="bgc1">17</td>
+<td class="bgc2">16</td>
+<td class="bgc1">15</td>
+<td class="bgc2">14</td>
+<td class="bgc1">13</td>
+<td></td><td></td>
 </tr>
 </table>
 
-<table class="rotation_rev boardeditor">
+<table class="rotation_rev boardeditor" border="3" rules="cols">
 <tr align="center" class="turn0">
-<td>Cube</td><td></td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td></td><td>bar</td><td></td>
-<td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td></td><td>b-off</td>
+<td>Cube</td><td></td>
+<td class="bgc1">13</td>
+<td class="bgc2">14</td>
+<td class="bgc1">15</td>
+<td class="bgc2">16</td>
+<td class="bgc1">17</td>
+<td class="bgc2">18</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc1">19</td>
+<td class="bgc2">20</td>
+<td class="bgc1">21</td>
+<td class="bgc2">22</td>
+<td class="bgc1">23</td>
+<td class="bgc2">24</td>
+<td></td><td>b-off</td>
 </tr>
 <tr align="center" class="turn1">
-<td>Cube</td><td></td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td></td><td>bar</td><td></td>
-<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td></td><td>b-off</td>
+<td>Cube</td><td></td>
+<td class="bgc1">12</td>
+<td class="bgc2">11</td>
+<td class="bgc1">10</td>
+<td class="bgc2">9</td>
+<td class="bgc1">8</td>
+<td class="bgc2">7</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc1">6</td>
+<td class="bgc2">5</td>
+<td class="bgc1">4</td>
+<td class="bgc2">3</td>
+<td class="bgc1">2</td>
+<td class="bgc2">1</td>
+<td></td><td>b-off</td>
 </tr>
 <tr align="center">
-<td></td><td>|</td>
-<td><button class="updn" id="b13ur">●</button><button class="updn" id="b13dr">○</button></td>
-<td><button class="updn" id="b14ur">●</button><button class="updn" id="b14dr">○</button></td>
-<td><button class="updn" id="b15ur">●</button><button class="updn" id="b15dr">○</button></td>
-<td><button class="updn" id="b16ur">●</button><button class="updn" id="b16dr">○</button></td>
-<td><button class="updn" id="b17ur">●</button><button class="updn" id="b17dr">○</button></td>
-<td><button class="updn" id="b18ur">●</button><button class="updn" id="b18dr">○</button></td>
-<td>|</td>
+<td></td><td></td>
+<td class="bgc1"><button class="updn" id="b13ur">●</button><button class="updn" id="b13dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b14ur">●</button><button class="updn" id="b14dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b15ur">●</button><button class="updn" id="b15dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b16ur">●</button><button class="updn" id="b16dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b17ur">●</button><button class="updn" id="b17dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b18ur">●</button><button class="updn" id="b18dr">○</button></td>
+<td></td>
 <td><button class="updn" id="b00ur">-</button><button class="updn" id="b00dr">○</button></td>
-<td>|</td>
-<td><button class="updn" id="b19ur">●</button><button class="updn" id="b19dr">○</button></td>
-<td><button class="updn" id="b20ur">●</button><button class="updn" id="b20dr">○</button></td>
-<td><button class="updn" id="b21ur">●</button><button class="updn" id="b21dr">○</button></td>
-<td><button class="updn" id="b22ur">●</button><button class="updn" id="b22dr">○</button></td>
-<td><button class="updn" id="b23ur">●</button><button class="updn" id="b23dr">○</button></td>
-<td><button class="updn" id="b24ur">●</button><button class="updn" id="b24dr">○</button></td>
-<td>|</td><td>○</td>
+<td></td>
+<td class="bgc1"><button class="updn" id="b19ur">●</button><button class="updn" id="b19dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b20ur">●</button><button class="updn" id="b20dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b21ur">●</button><button class="updn" id="b21dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b22ur">●</button><button class="updn" id="b22dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b23ur">●</button><button class="updn" id="b23dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b24ur">●</button><button class="updn" id="b24dr">○</button></td>
+<td></td><td>○</td>
 </tr>
 <tr valign="top" align="center">
 <td id="cuber" rowspan="3"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p13r"></td>
-<td id="p14r"></td>
-<td id="p15r"></td>
-<td id="p16r"></td>
-<td id="p17r"></td>
-<td id="p18r"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p13r" class="bgc1"></td>
+<td id="p14r" class="bgc2"></td>
+<td id="p15r" class="bgc1"></td>
+<td id="p16r" class="bgc2"></td>
+<td id="p17r" class="bgc1"></td>
+<td id="p18r" class="bgc2"></td>
+<td><br><br><br><br><br></td>
 <td id="p00r"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p19r"></td>
-<td id="p20r"></td>
-<td id="p21r"></td>
-<td id="p22r"></td>
-<td id="p23r"></td>
-<td id="p24r"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p19r" class="bgc1"></td>
+<td id="p20r" class="bgc2"></td>
+<td id="p21r" class="bgc1"></td>
+<td id="p22r" class="bgc2"></td>
+<td id="p23r" class="bgc1"></td>
+<td id="p24r" class="bgc2"></td>
+<td><br><br><br><br><br></td>
 <td id="boff-wr">0</td>
 </tr>
 <tr align="center">
-<td>|</td><td colspan="6"></td><td>|</td><td></td><td>|</td>
-<td colspan="6" align="center">Dice: <input type="text" id="dicer" size="3" value="00" text-align="center">
-</td><td>|</td><td></td>
+<td></td><td colspan="6" class="bgc3"></td><td></td><td></td><td></td>
+<td colspan="6" align="center" class="bgc3">Dice: <input type="text" id="dicer" size="3" value="00" text-align="center">
+</td><td></td><td></td>
 </tr>
 <tr valign="bottom" align="center">
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p12r"></td>
-<td id="p11r"></td>
-<td id="p10r"></td>
-<td id="p09r"></td>
-<td id="p08r"></td>
-<td id="p07r"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p12r" class="bgc2"></td>
+<td id="p11r" class="bgc1"></td>
+<td id="p10r" class="bgc2"></td>
+<td id="p09r" class="bgc1"></td>
+<td id="p08r" class="bgc2"></td>
+<td id="p07r" class="bgc1"></td>
+<td><br><br><br><br><br></td>
 <td id="p25r"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
-<td id="p06r"></td>
-<td id="p05r"></td>
-<td id="p04r"></td>
-<td id="p03r"></td>
-<td id="p02r"></td>
-<td id="p01r"></td>
-<td>|<br>|<br>|<br>|<br>|</td>
+<td><br><br><br><br><br></td>
+<td id="p06r" class="bgc2"></td>
+<td id="p05r" class="bgc1"></td>
+<td id="p04r" class="bgc2"></td>
+<td id="p03r" class="bgc1"></td>
+<td id="p02r" class="bgc2"></td>
+<td id="p01r" class="bgc1"></td>
+<td><br><br><br><br><br></td>
 <td id="boff-br">0</td>
 </tr>
 <tr align="center">
-<td></td><td>|</td>
-<td><button class="updn" id="b12ur">●</button><button class="updn" id="b12dr">○</button></td>
-<td><button class="updn" id="b11ur">●</button><button class="updn" id="b11dr">○</button></td>
-<td><button class="updn" id="b10ur">●</button><button class="updn" id="b10dr">○</button></td>
-<td><button class="updn" id="b09ur">●</button><button class="updn" id="b09dr">○</button></td>
-<td><button class="updn" id="b08ur">●</button><button class="updn" id="b08dr">○</button></td>
-<td><button class="updn" id="b07ur">●</button><button class="updn" id="b07dr">○</button></td>
-<td>|</td>
+<td></td><td></td>
+<td class="bgc2"><button class="updn" id="b12ur">●</button><button class="updn" id="b12dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b11ur">●</button><button class="updn" id="b11dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b10ur">●</button><button class="updn" id="b10dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b09ur">●</button><button class="updn" id="b09dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b08ur">●</button><button class="updn" id="b08dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b07ur">●</button><button class="updn" id="b07dr">○</button></td>
+<td></td>
 <td><button class="updn" id="b25ur">●</button><button class="updn" id="b25dr">-</button></td>
-<td>|</td>
-<td><button class="updn" id="b06ur">●</button><button class="updn" id="b06dr">○</button></td>
-<td><button class="updn" id="b05ur">●</button><button class="updn" id="b05dr">○</button></td>
-<td><button class="updn" id="b04ur">●</button><button class="updn" id="b04dr">○</button></td>
-<td><button class="updn" id="b03ur">●</button><button class="updn" id="b03dr">○</button></td>
-<td><button class="updn" id="b02ur">●</button><button class="updn" id="b02dr">○</button></td>
-<td><button class="updn" id="b01ur">●</button><button class="updn" id="b01dr">○</button></td>
-<td>|</td><td>●</td>
+<td></td>
+<td class="bgc2"><button class="updn" id="b06ur">●</button><button class="updn" id="b06dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b05ur">●</button><button class="updn" id="b05dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b04ur">●</button><button class="updn" id="b04dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b03ur">●</button><button class="updn" id="b03dr">○</button></td>
+<td class="bgc2"><button class="updn" id="b02ur">●</button><button class="updn" id="b02dr">○</button></td>
+<td class="bgc1"><button class="updn" id="b01ur">●</button><button class="updn" id="b01dr">○</button></td>
+<td></td><td>●</td>
 </tr>
 <tr align="center" class="turn0">
-<td></td><td></td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td><td></td><td>bar</td><td></td>
-<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td></td><td>b-off</td>
+<td></td><td></td>
+<td class="bgc2">12</td>
+<td class="bgc1">11</td>
+<td class="bgc2">10</td>
+<td class="bgc1">9</td>
+<td class="bgc2">8</td>
+<td class="bgc1">7</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc2">6</td>
+<td class="bgc1">5</td>
+<td class="bgc2">4</td>
+<td class="bgc1">3</td>
+<td class="bgc2">2</td>
+<td class="bgc1">1</td>
+<td></td><td>b-off</td>
 </tr>
 <tr align="center" class="turn1">
-<td></td><td></td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td></td><td>bar</td><td></td>
-<td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td></td><td></td>
+<td></td><td></td>
+<td class="bgc2">13</td>
+<td class="bgc1">14</td>
+<td class="bgc2">15</td>
+<td class="bgc1">16</td>
+<td class="bgc2">17</td>
+<td class="bgc1">18</td>
+<td></td><td>bar</td><td></td>
+<td class="bgc2">19</td>
+<td class="bgc1">20</td>
+<td class="bgc2">21</td>
+<td class="bgc1">22</td>
+<td class="bgc2">23</td>
+<td class="bgc1">24</td>
+<td></td><td></td>
 </tr>
 </table>
 ---------------------------------------------------------------<br>
@@ -264,10 +368,13 @@ cube value: <select name="cubevalue">
       <option value="4">4</option></select></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>xgid: <button type="button" id="clear">clear</button></td>
-    <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10">
+    <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
+<tr><td></td>
+<td>
 <button id="apply">Apply to Editor</button>
 <input type="button" id="copy2clip" data-clipboard-target="#xgid" value="XGID to Clipboard">
 <button id="clearboard">Clear Board</button>
+<button id="openingboard">Opening Board</button>
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 </table>
