@@ -313,8 +313,9 @@ function get_gnuanalysis_ajax(gnuid, depth) {
 
 //イベントハンドラの定義
 $(function() {
-  //up/downボタンがクリックされたとき
-  $('.updn').on('click', function(e) {
+  //[up,down] ボタンがクリックされたとき
+  $('.updn').on('touchstart click', function(e) {
+    e.preventDefault(); // touchstart以降のイベントを発生させない
     const id = $(this).attr("id");
     edit_position(id);
   });
@@ -326,7 +327,7 @@ $(function() {
     durty_analysis = durty_drawboard = true;
   });
 
-  //キューブ状態が変更されたときはキューブを表示する
+  //キューブ状態が変更されたときはキューブを表示
   $('[name=cubeowner], [name=cubevalue]').on('change', function(e) {
     const cubeval  = $('[name=cubevalue]').val();
     const cubeown  = $('[name=cubeowner]:checked').val();
@@ -341,7 +342,7 @@ $(function() {
     turn_ni_hanei(turn);
   });
 
-  //ゲームシチュエーションが変更されたときはxgid-outを編集する
+  //ゲームシチュエーションが変更されたときはxgidを編集
   $('#BgEditor').on('change', function(e) {
     if (e.target.id != "xgid") {
       const xgid = xgidout_wo_kumitate();
@@ -350,7 +351,7 @@ $(function() {
     }
   });
 
-  //[Draw the Board] ボタンがクリックされたとき(CW)
+  //[Draw the Board] ボタンがクリックされたとき
   $('#draw-board').on('click', function(e) {
     if (durty_drawboard) {
       const xgid = $('#xgid').val();
@@ -363,7 +364,7 @@ $(function() {
     $('#boardImg').fadeOut();
   });
 
-  //max cubeが変更されたときは倍率(キューブバリュー)を変更する
+  //max cubeが変更されたときは倍率(キューブバリュー)を変更
   $('#maxcube').on('change', function(e) {
     const maxcube  = $('#maxcube').val();
     $('#maxcubeval').text('('+get_cubevaltext(maxcube)+')');
@@ -431,6 +432,12 @@ $(function() {
   //[Clear Board] ボタンがクリックされたとき
   $('#clearboard').on('click', function(e) {
     gamen_ni_hanei(false);
+    durty_analysis = durty_drawboard = true;
+  });
+
+  //[Opening Board] ボタンがクリックされたとき
+  $('#openingboard').on('click', function(e) {
+    gamen_ni_hanei("XGID=-b----E-C---eE---c-e----B-:0:0:1:00:0:0:0:0:10");
     durty_analysis = durty_drawboard = true;
   });
 
