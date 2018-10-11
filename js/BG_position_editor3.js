@@ -2,7 +2,7 @@
 // (C)hinacoppy 2018
 
 //広域変数
-var imgpath = 'img/bw/';
+var imgpath = 'img/gnu/';
 var boardtype = 'gnu-cw';
 var durty_analysis = true;
 var durty_drawboard = true;
@@ -102,12 +102,9 @@ function cube_wo_hyoji(cubeown, cubeval, gamemode, crawford) {
 //ポジションの情報をボードエディタに反映
 function position_ni_hanei(position) {
   const poslist = position.split('');
-  for (let i=0; i<poslist.length; i++) {
-    const ch = poslist[i];
-    const pt = ("00"+i).substr(-2);
-    const str = make_pt_str(i, ch);
-    $('#p'+pt+'f').html(str);
-    $('#p'+pt+'r').html(str);
+  for (let p=0; p<poslist.length; p++) {
+    const ch = poslist[p];
+    draw_checker(p, ch);
   }
 }
 
@@ -174,18 +171,24 @@ function edit_position(id) {
 
   $('#position').val(nextpos).change(); //XGIDを編集するためにchangeイベントを発火
 
-  const str = make_pt_str(pt, chnew);
-  const pts = ("00"+pt).substr(-2);
-  $('#p'+pts+"f").html(str);
-  $('#p'+pts+"r").html(str);
+  draw_checker(pt, chnew);
   calc_boff(nextpos); //ベアオフを数える
+}
+
+//ポイントに駒を表示
+function draw_checker(pt, ch) {
+  const str = make_pt_str(pt, ch);
+  const col = select_col(ch);
+  const pts = ("00"+pt).substr(-2);
+  $('#p'+pts+"f").html(str).css("color", col);
+  $('#p'+pts+"r").html(str).css("color", col);
 }
 
 //ポイントに表示する駒
 function make_pt_str(pt, ch) {
   let ptstr;
   const nm = char2num(ch);
-  const checker = nm > 0 ? "●" : "○";
+  const checker = nm > 0 ? "★" : "▲";
   const absnm = Math.abs(nm);
   checker5 = (absnm >= 6) ? absnm : checker;
 
@@ -195,15 +198,28 @@ function make_pt_str(pt, ch) {
     if (absnm >= 2) { ptstr = ptstr + "<br>" + checker; }
     if (absnm >= 3) { ptstr = ptstr + "<br>" + checker; }
     if (absnm >= 4) { ptstr = ptstr + "<br>" + checker; }
-    if (absnm >= 5) { ptstr = ptstr + "<br>" + checker5; }
+    if (absnm >= 5) { ptstr = ptstr + "<br>" + checker5;}
   } else { //ボードの下半分
     if (absnm >= 1) { ptstr = checker; }
     if (absnm >= 2) { ptstr = checker + "<br>" + ptstr; }
     if (absnm >= 3) { ptstr = checker + "<br>" + ptstr; }
     if (absnm >= 4) { ptstr = checker + "<br>" + ptstr; }
-    if (absnm >= 5) { ptstr = checker5 + "<br>" + ptstr; }
+    if (absnm >= 5) { ptstr = checker5+ "<br>" + ptstr; }
   }
   return ptstr;
+}
+
+//駒に色を付ける
+function select_col(c) {
+  let col;
+  if ( c.match(/[A-Z]/) ) {
+    col="blue";
+  } else if ( c.match(/[a-z]/) ) {
+    col="red";
+  } else {
+    col="initial";
+  }
+  return col;
 }
 
 //ポジション文字(A-Za-z)を数字に変換
@@ -213,7 +229,7 @@ function char2num(c) {
     n = c.charCodeAt(0) - 'A'.charCodeAt(0) + 1;
   } else if ( c.match(/[a-z]/) ) {
     n = -1 * (c.charCodeAt(0) - 'a'.charCodeAt(0) + 1);
-  } else if (c == '-') {
+  } else { // c == '-'
     n = 0;
   }
   return n;
@@ -293,16 +309,16 @@ function disp_result_pre(d) {
 }
 
 //AJAX通信により、gnubgによる解析結果を取得する
-function get_gnuanalysis_ajax(gnuid, depth) {
+function get_gnuanalysis_ajax(xgid, depth, num) {
   $("#result").html("<img src='img/loading.gif'>");
   $.ajax({
-//    url: 'gnubg_ajax.php?g='+gnuid+'&d='+depth, //local PHP script
-//    url: 'http://local.example.com:1234/gnubg_ajax.js?g='+gnuid, //Node.js
-//    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+gnuid,
-//    url: '/cgi-bin/gnubg_ajax.cgi?g='+gnuid+'&d='+depth, //kagoya local
-    url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+gnuid+'&d='+depth, //Node.js
+//    url: 'gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num, //local PHP script
+//    url: 'http://local.example.com:1234/gnubg_ajax.js?g='+xgid, //Node.js
+//    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&n='+num,
+//    url: '/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&d='+depth+'&n='+num, //kagoya local
+    url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+xgid+'&d='+depth+'&n='+num, //Node.js
     method: 'GET',
-    dataType : "text",
+    dataType: "text",
   }).done(function(d) {
     disp_result_pre(d);
     durty_analysis = false;
@@ -419,7 +435,8 @@ $(function() {
     if (durty_analysis) {
       const xgid = $("#xgid").val();
       const depth = $("[name=depth]").val();
-      get_gnuanalysis_ajax(xgid, depth);
+      const num = $("#numofresults").val();
+      get_gnuanalysis_ajax(xgid, depth, num);
     }
     $('#analysisResult > .modalContents').css("max-width", "none");
     $('#analysisResult').fadeIn();
