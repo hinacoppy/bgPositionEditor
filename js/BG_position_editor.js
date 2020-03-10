@@ -279,8 +279,14 @@ function js_getboard(xgid, boardtype, imgpath) {
   $('#bgboard').show().html(bgboard).css("width", bdwidth);
   $('#pipinfo').text(pipinfo);
   draw_canvas();
-  setTimeout(function(){ $('#bgboard').hide(); }, 500); //draw_canvas()が終わったころに非表示にする
+  setTimeout(function(){ $('#bgboard').hide(); }, 2000); //draw_canvas()が終わったころに非表示にする
   durty_drawboard = false;
+}
+//xgfontボードを生成
+function make_xgfontboard(xgid, boardtype) {
+  const xgboard = new XgFontBoard(xgid, boardtype);
+  const board = xgboard.get_xgfontboard();
+  $('#xgfontboard').val(board);
 }
 
 //html2canvasコマンドでHTML画像を一つのpng画像にまとめる
@@ -312,11 +318,11 @@ function disp_result_pre(d) {
 function get_gnuanalysis_ajax(xgid, depth, num) {
   $("#result").html("<img src='img/loading.gif'>");
   $.ajax({
-//    url: 'gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num, //local PHP script
+    url: 'gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num, //local PHP script
 //    url: 'http://local.example.com:1234/gnubg_ajax.js?g='+xgid, //Node.js
 //    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&n='+num,
 //    url: '/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&d='+depth+'&n='+num, //kagoya local
-    url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+xgid+'&d='+depth+'&n='+num, //Node.js
+//    url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+xgid+'&d='+depth+'&n='+num, //Node.js
     method: 'GET',
     dataType: "text",
   }).done(function(d) {
@@ -372,6 +378,7 @@ $(function() {
     if (durty_drawboard) {
       const xgid = $('#xgid').val();
       js_getboard(xgid, boardtype, imgpath); //boardtype,imgpathは広域変数から取得
+      make_xgfontboard(xgid, boardtype);
     }
     $('#boardImg').fadeIn();
   });
@@ -389,6 +396,12 @@ $(function() {
   //[XGID to Clipboard] ボタンがクリックされたとき
   const clipboard = new ClipboardJS('#copy2clip');
   clipboard.on('success', function(e) {
+    e.clearSelection();
+  });
+
+  //[Copy XgFont Board] ボタンがクリックされたとき
+  const xgfontboard = new ClipboardJS('#copy-xgfontboard');
+  xgfontboard.on('success', function(e) {
     e.clearSelection();
   });
 

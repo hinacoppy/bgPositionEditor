@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Backgammon Position Editor in Browser">
-<meta name="author" content="(C)hinacoppy 2018">
+<meta name="author" content="(C)hinacoppy 2018 - 2020">
 <link rel="stylesheet" href="css/BG_position_editor3.css">
 <title>BG Position Editor</title>
 </head>
@@ -386,16 +386,18 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
     </h3>
     <img id="boardone" src="">
     <div id="pipinfo"></div>
-    <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
+    <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a> &nbsp;
+    <input type="button" id="copy-xgfontboard" data-clipboard-target="#xgfontboard" value="Copy XgFont Board">
   </div>
 </section>
 
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
+<textarea id="xgfontboard" rows="1" cols="4"></textarea>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-alpha.12/dist/html2canvas.min.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/clipboard.min.js"></script> <!-- version 2.0.6 -->
+<script src="/js/html2canvas.min.js"></script> <!-- version 1.0.0-rc.5 -->
 <script src="./js/bg_class.js"></script>
-<script src="./js/BG_position_editor3.js"></script>
+<script src="./js/BG_position_editor.js"></script>
 </body>
 </html>
