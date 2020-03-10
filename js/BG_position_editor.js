@@ -282,6 +282,7 @@ function js_getboard(xgid, boardtype, imgpath) {
   setTimeout(function(){ $('#bgboard').hide(); }, 2000); //draw_canvas()が終わったころに非表示にする
   durty_drawboard = false;
 }
+
 //xgfontボードを生成
 function make_xgfontboard(xgid, boardtype) {
   const xgboard = new XgFontBoard(xgid, boardtype);
@@ -382,6 +383,7 @@ $(function() {
     }
     $('#boardImg').fadeIn();
   });
+
   //閉じるボタンクリック
   $('#closeImg').on('click', function(){
     $('#boardImg').fadeOut();

@@ -467,29 +467,29 @@ class XgFontBoard {
     this.set_chequer();
   }
 
-  // ボードフレームを表示
+  //ボードフレームを表示
   set_frame() {
     const no = this.rotation + this.turn * 2;
-    const frameary = [[161,162,163,164],[173,174,175,176],[165,166,167,168],[169,170,171,172]];
+    const frameary = [[161,162,163,164], [173,174,175,176], [165,166,167,168], [169,170,171,172]];
     this.xgboard[ 0][2] = frameary[no][0];
     this.xgboard[ 0][6] = frameary[no][1];
     this.xgboard[12][2] = frameary[no][2];
     this.xgboard[12][6] = frameary[no][3];
   }
 
-  // キューブを表示
+  //キューブを表示
   set_cube() {
     if (this.xgid.get_crawford()) { return; }
     const xx = (this.rotation == 0) ? 0 : 18;
     const cubepos = this.xgid.get_cubepos();
     const cubeval = this.xgid.get_cube();
     const yyary = [1, 6, 11];
-    const yy = yyary[this.xgid.get_cubepos() + 1];
+    const yy = yyary[this.xgid.get_cubepos() + 1]; //cubepos = (-1, 0, 1)
     const cubechar = (cubeval == 0) ? 39 : 33 + cubeval; // 39 = cube64
     this.xgboard[yy][xx] = cubechar;
   }
 
-  // ダイスを表示
+  //ダイスを表示
   set_dice() {
     if (this.xgid.get_dice() == "00") { return; }
     const xx0 = (this.turn == 0) ? 12 : 3;
@@ -499,23 +499,23 @@ class XgFontBoard {
     this.xgboard[6][xx3] = this.xgid.get_dice(2) + offset;
   }
 
-  // ベアオフチェッカーを表示
+  //ベアオフチェッカーを表示
   set_bearoff() {
     const xx = (this.rotation == 0) ? 18 : 0;
     const bo_me = this.xgid.get_boff(0);
     const bo_yu = this.xgid.get_boff(1);
-    this.xgboard[ 1][xx] = (bo_yu >=  5) ? 230 : ((bo_yu >= 1) ? 230 + ( 5 - bo_yu) : 32);
-    this.xgboard[ 2][xx] = (bo_yu >= 10) ? 230 : ((bo_yu >= 6) ? 230 + (10 - bo_yu) : 32);
-    this.xgboard[ 3][xx] = (bo_yu >= 15) ? 230 : ((bo_yu >=11) ? 230 + (15 - bo_yu) : 32);
-    this.xgboard[11][xx] = (bo_me >=  5) ? 235 : ((bo_me >= 1) ? 235 + ( 5 - bo_me) : 32);
-    this.xgboard[10][xx] = (bo_me >= 10) ? 235 : ((bo_me >= 6) ? 235 + (10 - bo_me) : 32);
-    this.xgboard[ 9][xx] = (bo_me >= 15) ? 235 : ((bo_me >=11) ? 235 + (15 - bo_me) : 32);
+    this.xgboard[ 1][xx] = (bo_yu >  5) ? 230 : ((bo_yu > 0) ? 230 + ( 5 - bo_yu) : 32);
+    this.xgboard[ 2][xx] = (bo_yu > 10) ? 230 : ((bo_yu > 5) ? 230 + (10 - bo_yu) : 32);
+    this.xgboard[ 3][xx] =                      ((bo_yu >10) ? 230 + (15 - bo_yu) : 32);
+    this.xgboard[11][xx] = (bo_me >  5) ? 235 : ((bo_me > 0) ? 235 + ( 5 - bo_me) : 32);
+    this.xgboard[10][xx] = (bo_me > 10) ? 235 : ((bo_me > 5) ? 235 + (10 - bo_me) : 32);
+    this.xgboard[ 9][xx] =                      ((bo_me >10) ? 235 + (15 - bo_me) : 32);
   }
 
-  // チェッカーを表示
+  //チェッカーを表示
   set_chequer() {
-    const xxary = [[9,16,15,14,13,12,11, 7, 6, 5, 4, 3, 2, 2, 3, 4, 5, 6, 7,11,12,13,14,15,16, 9],
-                   [9, 2, 3, 4, 5, 6, 7,11,12,13,14,15,16,16,15,14,13,12,11, 7, 6, 5, 4, 3, 2, 9]];
+    const xxary = [[9,16,15,14,13,12,11, 7, 6, 5, 4, 3, 2, 2, 3, 4, 5, 6, 7,11,12,13,14,15,16, 9], //CCW
+                   [9, 2, 3, 4, 5, 6, 7,11,12,13,14,15,16,16,15,14,13,12,11, 7, 6, 5, 4, 3, 2, 9]]; //CW
     for (var pt = 0; pt < 26; pt++) {
       const col = this.xgid.get_ptcol(pt);
       const no  = this.xgid.get_ptno(pt);
@@ -536,6 +536,7 @@ class XgFontBoard {
     }
   }
 
+  //ボードを文字コードで組み立てる
   get_xgfontboard() {
     var xgboard = "";
     for (var line of this.xgboard) {
