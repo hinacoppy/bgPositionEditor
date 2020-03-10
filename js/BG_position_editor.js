@@ -278,7 +278,7 @@ function js_getboard(xgid, boardtype, imgpath) {
   const bdwidth = html.get_bdwidth();
   $('#bgboard').show().html(bgboard).css("width", bdwidth);
   $('#pipinfo').text(pipinfo);
-  draw_canvas();
+  setTimeout(function(){ draw_canvas(); }, 500); //show().html()が終わるのをしばらく待つ
   setTimeout(function(){ $('#bgboard').hide(); }, 2000); //draw_canvas()が終わったころに非表示にする
   durty_drawboard = false;
 }
