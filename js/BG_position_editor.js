@@ -1,9 +1,8 @@
 // BG_position_editor 用 JavaScript
-// (C)hinacoppy 2018
+// (C)hinacoppy 2018 -- 2020
 
 //広域変数
-var imgpath = 'img/gnu/';
-var boardtype = 'gnu-cw';
+var rotation = 'cw';
 var durty_analysis = true;
 var durty_drawboard = true;
 
@@ -269,10 +268,11 @@ function xgidout_wo_kumitate() {
 }
 
 //JavaScript処理で、ボード情報を取得する
-function js_getboard(xgid, boardtype, imgpath) {
+function js_getboard(xgid, boardtype, imgpath, rotation) {
   const html = new HtmlBoard(xgid);
-  html.imgpath = imgpath;
   html.boardtype = boardtype;
+  html.imgpath  = imgpath;
+  html.rotation = rotation;
   const bgboard = html.get_board_html();
   const pipinfo = html.get_pipinfo();
   const bdwidth = html.get_bdwidth();
@@ -284,8 +284,8 @@ function js_getboard(xgid, boardtype, imgpath) {
 }
 
 //xgfontボードを生成
-function make_xgfontboard(xgid, boardtype) {
-  const xgboard = new XgFontBoard(xgid, boardtype);
+function make_xgfontboard(xgid, rotation) {
+  const xgboard = new XgFontBoard(xgid, rotation);
   const board = xgboard.get_xgfontboard();
   $('#xgfontboard').val(board);
 }
@@ -334,6 +334,26 @@ function get_gnuanalysis_ajax(xgid, depth, num) {
   });
 }
 
+function get_boardtype() {
+  const boardtype = $("input[name='boardtype']:checked").val();
+  return boardtype;
+}
+
+function get_imgpath(boardtype) {
+  switch(boardtype) {
+  case 'bw':
+    return 'img/bw/';
+    break;
+  case 'iti':
+    return 'img/iti/';
+    break;
+  case 'gnu':
+  default:
+    return 'img/gnu/';
+    break;
+  }
+}
+
 //イベントハンドラの定義
 $(function() {
   //[up,down] ボタンがクリックされたとき
@@ -376,10 +396,17 @@ $(function() {
 
   //[Draw the Board] ボタンがクリックされたとき
   $('#draw-board').on('click', function(e) {
+    const boardtype = get_boardtype();
     if (durty_drawboard) {
       const xgid = $('#xgid').val();
-      js_getboard(xgid, boardtype, imgpath); //boardtype,imgpathは広域変数から取得
-      make_xgfontboard(xgid, boardtype);
+      const imgpath = get_imgpath(boardtype);
+      js_getboard(xgid, boardtype, imgpath, rotation); //rotationは広域変数から取得
+      make_xgfontboard(xgid, rotation);
+    }
+    if (boardtype == 'xg') {
+      $('#showimg').hide(); $('#showxgfont').show();
+    } else {
+      $('#showimg').show(); $('#showxgfont').hide();
     }
     $('#boardImg').fadeIn();
   });
@@ -432,14 +459,14 @@ $(function() {
 
   //[change Rotation] ボタンがクリックされたとき
   $('#alt-rotation').on('click', function(e) {
-    switch(boardtype) {
-    case 'gnu-cw':
+    switch(rotation) {
+    case 'cw':
       $('.rotation_rev').show(); $('.rotation_fwd').hide();
-      boardtype = 'gnu-ccw'
+      rotation = 'ccw'
       break;
-    case 'gnu-ccw':
+    case 'cw':
       $('.rotation_fwd').show(); $('.rotation_rev').hide();
-      boardtype = 'gnu-cw'
+      rotation = 'cw'
       break;
     }
     durty_drawboard = true;

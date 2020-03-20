@@ -60,7 +60,7 @@
   top: 50%; /* 画面の中央寄せ */
   left: 50%;
   transform:translate(-50%,-50%);
-  width: 70%;
+  width: 60%;
   max-width: 432px;
   padding: 0px 30px 10px 30px;
   background-color: #ffe;
@@ -68,4 +68,17 @@
 }
 .closeModal{
   cursor: pointer;
+}
+
+/* XG Font Board */
+@font-face {
+  font-family: 'eXtremeGammonWeb';
+  src: url('./webfonts/extreme-gammon.woff2') format('woff2'),
+  url('./webfonts/extreme-gammon.woff') format('woff'),
+  url('./webfonts/extreme-gammon.ttf') format('truetype');
+}
+
+.eXtremeFont {
+  font-family: 'eXtremeGammonWeb';
+  font-size: 1.5em;
 }

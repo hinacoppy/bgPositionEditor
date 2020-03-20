@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="description" content="Backgammon Position Editor in Browser">
 <meta name="author" content="(C)hinacoppy 2018 - 2020">
-<link rel="stylesheet" href="css/BG_position_editor3.css">
+<link rel="stylesheet" href="css/BG_position_editor4.css">
 <title>BG Position Editor</title>
 </head>
 <body>
@@ -345,15 +345,6 @@ cube value: <select name="cubevalue">
   <td><input type="number" id="maxcube" min="0" max="10" value="10">
       <span id="maxcubeval">(1024)</span></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>analysis depth:</td>
-  <td><select name="depth">
-      <option value="1">1</option>
-      <option value="2" selected>2</option>
-      <option value="3">3</option>
-      <option value="4">4</option></select>
-&nbsp; &nbsp;
-num of results: <input type="number" id="numofresults" min="0" max="20" value="5"></td></tr>
-<tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>xgid: <button type="button" id="clear">clear</button></td>
     <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
 <tr><td></td>
@@ -363,6 +354,23 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
 <button id="clearboard">Clear Board</button>
 <button id="openingboard">Opening Board</button>
 </td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>board type:</td>
+<td>
+<label><input type="radio" name="boardtype" value="gnu" checked>GnuBoard(white-brown)</label> &ensp;
+<label><input type="radio" name="boardtype" value="bw">GnuBoard(black-white)</label> &ensp;
+<label><input type="radio" name="boardtype" value="iti">ItiBoard</label> &ensp;
+<label><input type="radio" name="boardtype" value="xg">XgFont Board</label> &ensp;
+</td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>analysis depth:</td>
+  <td><select name="depth">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option></select>
+&nbsp; &nbsp;
+num of results: <input type="number" id="numofresults" min="0" max="20" value="5"></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 </table>
 <input type="hidden" id="position" value="--------------------------">
@@ -384,20 +392,26 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
       <span class="modalTitle">Board Image</span>
       <button id="closeImg" class="closeModal">×</button>
     </h3>
-    <img id="boardone" src="">
     <div id="pipinfo"></div>
-    <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a> &nbsp;
-    <input type="button" id="copy-xgfontboard" data-clipboard-target="#xgfontboard" value="Copy XgFont Board">
+    <div id="showimg">
+      <img id="boardone" src=""><br>
+      <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
+    </div>
+    <div id="showxgfont">
+      <textarea id="xgfontboard" rows="14" cols="16" class="eXtremeFont"></textarea><br>
+      <input type="button" id="copy-xgfontboard" data-clipboard-target="#xgfontboard" value="Copy XgFont Board">
+    </div>
   </div>
 </section>
 
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
-<textarea id="xgfontboard" rows="1" cols="4"></textarea>
 
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/clipboard.min.js"></script> <!-- version 2.0.6 -->
 <script src="/js/html2canvas.min.js"></script> <!-- version 1.0.0-rc.5 -->
-<script src="./js/bg_class.js"></script>
+<script src="/js/BgXgid_class.js"></script>
+<script src="/js/BgHtmlBoard_class.js"></script>
+<script src="/js/BgXgFontBoard_class.js"></script>
 <script src="./js/BG_position_editor.js"></script>
 </body>
 </html>
