@@ -510,5 +510,8 @@ $(function() {
       height:'300px'
     });
   }
+  if (isGithub()) {
+    $('#analysisResult').hide();
+  }
 
 }); //close to $(function() {
