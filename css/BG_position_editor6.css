@@ -1,0 +1,80 @@
+/** BG_position_editor.css */
+
+.boardeditor input,select{
+  text-align:center;
+  font-size:100%;
+}
+input{
+  font-size:100%;
+}
+.boardeditor td{
+  text-align:center;
+}
+.boardeditor{
+  background-color:#eee;
+}
+.bgc1{
+  background-color:#fef;
+}
+.bgc2{
+  background-color:#eff;
+}
+.bgc3{
+  background-color:#fff;
+}
+.match_mode{
+}
+.money_mode{
+  display:none; /* ゲームモード初期値は match game とし、money gameは初期非表示 */
+}
+.rotation_fwd{
+}
+.rotation_rev{
+  display:none; /* 初期設定はCW(fwd)で手前側の手番。なのでこれは非表示 */
+}
+.turn0{
+}
+.turn1{
+  display:none; /* 同上 */
+}
+
+/* モーダルウィンドウCSS */
+/* 参考：http://webnonotes.com/javascript-2/fake-window/ */
+.modalContainer{
+  background-color:#ffe;
+  border:solid #00f 2px;
+}
+.modalContainer button{ /* ボタン */
+  cursor:pointer;
+  margin-right:5px;
+}
+.modalTitle{
+  width: 100%;
+  height:35px;
+  line-height:35px; /* 上下中央揃え */
+  font-weight:bold;
+  text-indent:1em;
+  background:#777;
+  color:white;
+  text-align:right;
+  cursor:move;
+}
+.modalTitleText{
+  float:left; /* 閉じるボタンを右寄せ */
+}
+.modalBody{ /* データ表示 */
+  margin:0;
+  padding:20px;
+}
+
+/* XG Font Board */
+@font-face {
+  font-family:'XGFont';
+  src:url('../webfonts/extreme-gammon.woff2') format('woff2'),
+  url('../webfonts/extreme-gammon.woff') format('woff'),
+  url('../webfonts/extreme-gammon.ttf') format('truetype');
+}
+.eXtremeFont {
+  font-family:'XGFont';
+  font-size:1.5em;
+}

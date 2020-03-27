@@ -4,15 +4,11 @@
 <meta charset="UTF-8">
 <meta name="description" content="Backgammon Position Editor in Browser">
 <meta name="author" content="(C)hinacoppy 2018 - 2020">
-<link rel="stylesheet" href="css/BG_position_editor4.css">
+<link rel="stylesheet" href="css/BG_position_editor6.css">
 <title>BG Position Editor</title>
 </head>
 <body>
-<h3>BG Position Editor &emsp;
-<button id="alt-rotation">Change rotation</button> &nbsp;
-<button id="analyse">Analyse</button> &nbsp;
-<button id="draw-board">Draw the Board</button> &nbsp;
-</h3>
+<h3>BG Position Editor</h3>
 
 <form id="BgEditor" onSubmit="return false;">
 <table class="rotation_fwd boardeditor" border="3" rules="cols">
@@ -86,9 +82,13 @@
 <td><br><br><br><br><br></td><td id="cubef" rowspan="3"></td>
 </tr>
 <tr align="center">
-<td></td><td></td><td colspan="6" class="bgc3"></td><td></td>
-<td colspan="6" align="center" class="bgc3">Dice: <input type="text" id="dicef" size="3" value="00" text-align="center">
-</td><td></td>
+<td></td><td></td>
+<td colspan="6" class="bgc3 turn0"></td>
+<td colspan="6" class="bgc3 turn1" align="center">Dice: <input type="text" id="dice1" size="3" value="00" text-align="center"></td>
+<td></td>
+<td colspan="6" class="bgc3 turn1"></td>
+<td colspan="6" class="bgc3 turn0" align="center">Dice: <input type="text" id="dice2" size="3" value="00" text-align="center"></td>
+<td></td>
 </tr>
 <tr valign="bottom" align="center">
 <td id="boff-bf">0</td>
@@ -233,9 +233,13 @@
 <td id="boff-wr">0</td>
 </tr>
 <tr align="center">
-<td></td><td colspan="6" class="bgc3"></td><td></td>
-<td colspan="6" align="center" class="bgc3">Dice: <input type="text" id="dicer" size="3" value="00" text-align="center">
-</td><td></td><td></td>
+<td></td>
+<td colspan="6" class="bgc3 turn0"></td>
+<td colspan="6" class="bgc3 turn1" align="center">Dice: <input type="text" id="dice3" size="3" value="00" text-align="center"></td>
+<td></td>
+<td colspan="6" class="bgc3 turn1"></td>
+<td colspan="6" class="bgc3 turn0" align="center">Dice: <input type="text" id="dice4" size="3" value="00" text-align="center"></td>
+<td></td><td></td>
 </tr>
 <tr valign="bottom" align="center">
 <td><br><br><br><br><br></td>
@@ -307,91 +311,100 @@
 <td></td><td></td>
 </tr>
 </table>
----------------------------------------------------------------<br>
-cube position: <label><input type="radio" name="cubeowner" value="0" checked>center</label>
-               <label><input type="radio" name="cubeowner" value="1">own</label>
-               <label><input type="radio" name="cubeowner" value="-1">opponent</label>
-&nbsp; &nbsp; &nbsp;
-cube value: <select name="cubevalue">
-            <option value="0" selected>0</option>
-            <option value="0">1</option>
-            <option value="1">2</option>
-            <option value="2">4</option>
-            <option value="3">8</option>
-            <option value="4">16</option>
-            <option value="5">32</option>
-            </select>
-
 <table>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>cube:</td>
+<td>
+<label><input type="radio" name="cubeowner" value="0" checked>center</label>
+<label><input type="radio" name="cubeowner" value="1">own</label>
+<label><input type="radio" name="cubeowner" value="-1">opponent</label>
+&emsp;
+value: <select name="cubevalue">
+       <option value="0" selected>0</option>
+       <option value="0">1</option>
+       <option value="1">2</option>
+       <option value="2">4</option>
+       <option value="3">8</option>
+       <option value="4">16</option>
+       <option value="5">32</option>
+       </select>
+</td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>game mode:</td>
-  <td><label><input type="radio" name="gamemode" value="moneygame" checked>money game</label>
-      <label><input type="radio" name="gamemode" value="matchgame">match game</label></td></tr>
-<tr class="deco_match"><td>match length:</td><td><input type="number" id="matchlength" min="0" max="99" value="0"></td></tr>
-<tr class="deco_match"><td>score1(own):</td>     <td><input type="number" id="score1" min="0" max="99" value="0"></td></tr>
-<tr class="deco_match"><td>score2(opponent):</td><td><input type="number" id="score2" min="0" max="99" value="0"></td></tr>
-<tr class="deco_match"><td>crawford:</td>
+  <td><label><input type="radio" name="gamemode" value="matchgame" checked>match</label>
+      <label><input type="radio" name="gamemode" value="moneygame">unlimited</label></td></tr>
+<tr class="match_mode"><td>score:</td><td>
+<input type="number" id="score1" min="0" max="99" value="0"> -
+<input type="number" id="score2" min="0" max="99" value="0"> /
+<input type="number" id="matchlength" min="0" max="99" value="0"> &emsp; (own - opponent / length)</td></tr>
+<tr class="match_mode"><td>crawford:</td>
   <td><label><input type="radio" name="crawford" value="0" checked>no</label>
       <label><input type="radio" name="crawford" value="1">yes</label></td></tr>
-<tr class="deco_money"><td>jacoby rule:</td>
-  <td><label><input type="radio" name="jacoby" value="0">no jacoby,no beaver(0)</label>
-      <label><input type="radio" name="jacoby" value="1">jacoby,no beaver(1)</label><br>
-      <label><input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</label>
-      <label><input type="radio" name="jacoby" value="3" checked>jacoby,beaver(3)</label></td></tr>
+<tr class="money_mode"><td>jacoby rule:</td>
+  <td><label><input type="radio" name="jacoby" value="0" checked>no jacoby,no beaver(0)</label>
+      <label><input type="radio" name="jacoby" value="1">jacoby,no beaver(1)</label></td></tr>
+<tr class="money_mode"><td></td>
+  <td><label><input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</label>
+      <label><input type="radio" name="jacoby" value="3">jacoby,beaver(3)</label></td></tr>
 <tr><td>turn:</td>
   <td><label><input type="radio" name="turn" value="1" checked>own</label>
       <label><input type="radio" name="turn" value="-1">opponent</label></td></tr>
+<tr><td>bearoff to:</td>
+  <td><label><input type="radio" name="rotation" value="cw" checked>left</label>
+      <label><input type="radio" name="rotation" value="ccw">right</label></td></tr>
 <tr><td>max cube:</td>
   <td><input type="number" id="maxcube" min="0" max="10" value="10">
       <span id="maxcubeval">(1024)</span></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>xgid: <button type="button" id="clear">clear</button></td>
+<tr><td>xgid:</td>
     <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
 <tr><td></td>
 <td>
-<button id="apply">Apply to Editor</button>
-<input type="button" id="copy2clip" data-clipboard-target="#xgid" value="XGID to Clipboard">
-<button id="clearboard">Clear Board</button>
-<button id="openingboard">Opening Board</button>
+<button id="erase">Erase</button> &nbsp;
+<button id="apply">Apply to Editor</button> &nbsp;
+<button id="xgid2clip" data-clipboard-target="#xgid">XGID to Clipboard</button> &nbsp;
+<button id="clearboard">Clear Board</button> &nbsp;
+<button id="openingposition">Opening Position</button> &nbsp;
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>board type:</td>
-<td>
-<label><input type="radio" name="boardtype" value="gnu" checked>GnuBoard(white-brown)</label> &ensp;
-<label><input type="radio" name="boardtype" value="bw">GnuBoard(black-white)</label> &ensp;
-<label><input type="radio" name="boardtype" value="iti">ItiBoard</label> &ensp;
-<label><input type="radio" name="boardtype" value="xg">XgFont Board</label> &ensp;
+<tr><td>export board:</td>
+<td><button id="drawboard">Draw the Board</button> &nbsp;
+type:
+<label><input type="radio" name="boardtype" value="gnu" checked>GnuBG(white-brown)</label> &nbsp;
+<label><input type="radio" name="boardtype" value="bw">GnuBG(black-white)</label> &nbsp;
+<label><input type="radio" name="boardtype" value="iti">Itikawa</label> &nbsp;
+<label><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
+<!-- <label><input type="radio" name="boardtype" value="txt">Text Board</label> &nbsp; <!-- Future implementation -->
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>analysis depth:</td>
-  <td><select name="depth">
+<tr><td>analysis:</td>
+  <td><button id="analyse">Analyse</button> &emsp;
+      depth: <select name="depth">
       <option value="1">1</option>
       <option value="2" selected>2</option>
       <option value="3">3</option>
-      <option value="4">4</option></select>
-&nbsp; &nbsp;
+      <option value="4">4</option></select> &nbsp;
 num of results: <input type="number" id="numofresults" min="0" max="20" value="5"></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 </table>
 <input type="hidden" id="position" value="--------------------------">
 </form>
 
-<section id="analysisResult" class="modalArea">
-  <div class="modalContents">
-    <h3 class="modalTitleContainer">
-      <span class="modalTitle">Analysis Result</span>
-      <button id="closeResult" class="closeModal">×</button>
-    </h3>
+<section id="analysisResult" class="modalContainer">
+  <div id="analysisResultHeader" class="modalTitle">
+    <span class="modalTitleText">Analysis Result</span>
+    <button id="closeResult" class="closeModal">×</button>
+  </div>
+  <div class="modalBody">
     <pre id="result"></pre>
   </div>
 </section>
-
-<section id="boardImg" class="modalArea">
-  <div class="modalContents">
-    <h3 class="modalTitleContainer">
-      <span class="modalTitle">Board Image</span>
-      <button id="closeImg" class="closeModal">×</button>
-    </h3>
+<section id="boardImg" class="modalContainer">
+  <div id="boardImgHeader" class="modalTitle">
+    <span class="modalTitleText">Board Image</span>
+    <button id="closeImg" class="closeModal">×</button>
+  </div>
+  <div class="modalBody">
     <div id="pipinfo"></div>
     <div id="showimg">
       <img id="boardone" src=""><br>
@@ -403,8 +416,8 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
     </div>
   </div>
 </section>
-
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
+
 
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/clipboard.min.js"></script> <!-- version 2.0.6 -->
@@ -412,6 +425,7 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
 <script src="/js/BgXgid_class.js"></script>
 <script src="/js/BgHtmlBoard_class.js"></script>
 <script src="/js/BgXgFontBoard_class.js"></script>
-<script src="./js/BG_position_editor.js"></script>
+<script src="./js/BG_position_editor3.js"></script>
+<script src="./js/jquery.funcHoverDiv.js"></script>
 </body>
 </html>

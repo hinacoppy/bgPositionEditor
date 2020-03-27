@@ -20,7 +20,7 @@ function gamen_ni_hanei(xgid) {
   $('#score1').val(sc1);
   $('#score2').val(sc2);
   $('#position').val(pos);
-  $('#dicer, #dicef').val(dice);
+  $('#dice1, #dice2, #dice3, #dice4').val(dice);
   $('#maxcube').val(maxcube);
   $('#position').val(pos);
   $('#maxcubeval').text('('+get_cubevaltext(maxcube)+')');
@@ -253,7 +253,7 @@ function xgidout_wo_kumitate() {
   const cubeval  = $('[name=cubevalue]').val();
   const cubeown  = $('[name=cubeowner]:checked').val();
   const turn     = $('[name=turn]:checked').val();
-  const dice     = $('#dicef').val();
+  const dice     = $('#dice1').val();
   let   sc1      = $('#score1').val();
   let   sc2      = $('#score2').val();
   const jbcf     = check_jb_cf();
@@ -267,12 +267,12 @@ function xgidout_wo_kumitate() {
   return xgidout;
 }
 
-//JavaScript処理で、ボード情報を取得する
-function js_getboard(xgid, boardtype, imgpath, rotation) {
+//htmlボードを生成(GnuBG, Itikawa)
+function make_htmlboard(xgid, boardtype, rotation) {
   const html = new HtmlBoard(xgid);
   html.boardtype = boardtype;
-  html.imgpath  = imgpath;
   html.rotation = rotation;
+  html.imgpath  = get_imgpath(boardtype);;
   const bgboard = html.get_board_html();
   const pipinfo = html.get_pipinfo();
   const bdwidth = html.get_bdwidth();
@@ -301,8 +301,8 @@ function draw_canvas() {
 }
 
 function gamemode_css(gamemode) {
-  if (gamemode == "moneygame") { $('.deco_money').css("color", "black"); $('.deco_match').css("color", "gray"); }
-  if (gamemode == "matchgame") { $('.deco_money').css("color", "gray");  $('.deco_match').css("color", "black"); }
+  if (gamemode == "moneygame") { $('.money_mode').show(); $('.match_mode').hide(); }
+  if (gamemode == "matchgame") { $('.money_mode').hide(); $('.match_mode').show(); }
 }
 
 //AJAXエラー時のメッセージ
@@ -354,8 +354,22 @@ function get_imgpath(boardtype) {
   }
 }
 
+function isGithub() {
+  const hostname = $(location).attr('host');
+  return (hostname.indexOf("hinacoppy.github.io") >= 0);
+}
+
 //イベントハンドラの定義
 $(function() {
+  //ゲームシチュエーションが変更されたときはxgidを編集
+  $('#BgEditor').on('change', function(e) {
+    if (e.target.id != "xgid") {
+      const xgid = xgidout_wo_kumitate();
+      $('#xgid').val(xgid);
+      durty_analysis = durty_drawboard = true;
+    }
+  });
+
   //[up,down] ボタンがクリックされたとき
   $('.updn').on('touchstart click', function(e) {
     e.preventDefault(); // touchstart以降のイベントを発生させない
@@ -363,11 +377,10 @@ $(function() {
     edit_position(id);
   });
 
-  //[Apply to Editor] ボタンがクリックされたとき
-  $('#apply').on('click', function(e) {
-    const xgid = $('#xgid').val();
-    gamen_ni_hanei(xgid);
-    durty_analysis = durty_drawboard = true;
+  //Diceが変更されたとき、別画面のダイスを更新
+  $('#dice1, #dice2, #dice3, #dice4').on('change', function(e) {
+    const changeddice = $(this).val();
+    $('#dice1, #dice2, #dice3, #dice4').val(changeddice);
   });
 
   //キューブ状態が変更されたときはキューブを表示
@@ -379,41 +392,27 @@ $(function() {
     cube_wo_hyoji(cubeown, cubeval, gamemode, crawford);
   });
 
+  //gamemodeが変更されたときは設定不可な項目を非表示に
+  $('[name=gamemode]').on('change', function(e) {
+    const gamemode = $('[name=gamemode]:checked').val();
+    gamemode_css(gamemode);
+  });
+
   //turnが変更されたとき
   $('[name=turn]').on('change', function(e) {
     const turn = $('[name=turn]:checked').val();
     turn_ni_hanei(turn);
   });
 
-  //ゲームシチュエーションが変更されたときはxgidを編集
-  $('#BgEditor').on('change', function(e) {
-    if (e.target.id != "xgid") {
-      const xgid = xgidout_wo_kumitate();
-      $('#xgid').val(xgid);
-      durty_analysis = durty_drawboard = true;
-    }
-  });
-
-  //[Draw the Board] ボタンがクリックされたとき
-  $('#draw-board').on('click', function(e) {
-    const boardtype = get_boardtype();
-    if (durty_drawboard) {
-      const xgid = $('#xgid').val();
-      const imgpath = get_imgpath(boardtype);
-      js_getboard(xgid, boardtype, imgpath, rotation); //rotationは広域変数から取得
-      make_xgfontboard(xgid, rotation);
-    }
-    if (boardtype == 'xg') {
-      $('#showimg').hide(); $('#showxgfont').show();
+  //bearoff toが変更されたとき
+  $('[name=rotation]').on('change', function(e) {
+    rotation = $('[name=rotation]:checked').val(); //広域変数を編集
+    if (rotation == 'ccw') {
+      $('.rotation_rev').show(); $('.rotation_fwd').hide();
     } else {
-      $('#showimg').show(); $('#showxgfont').hide();
+      $('.rotation_fwd').show(); $('.rotation_rev').hide();
     }
-    $('#boardImg').fadeIn();
-  });
-
-  //閉じるボタンクリック
-  $('#closeImg').on('click', function(){
-    $('#boardImg').fadeOut();
+    durty_drawboard = true;
   });
 
   //max cubeが変更されたときは倍率(キューブバリュー)を変更
@@ -422,70 +421,22 @@ $(function() {
     $('#maxcubeval').text('('+get_cubevaltext(maxcube)+')');
   });
 
-  //[XGID to Clipboard] ボタンがクリックされたとき
-  const clipboard = new ClipboardJS('#copy2clip');
-  clipboard.on('success', function(e) {
-    e.clearSelection();
-  });
-
-  //[Copy XgFont Board] ボタンがクリックされたとき
-  const xgfontboard = new ClipboardJS('#copy-xgfontboard');
-  xgfontboard.on('success', function(e) {
-    e.clearSelection();
-  });
-
-  //[Clear] ボタンがクリックされたとき
-  $('#clear').on('click', function(e) {
+  //[Erase] ボタンがクリックされたとき
+  $('#erase').on('click', function(e) {
     $('#xgid').val('').focus();
   });
 
-  //gamemodeが変更されたときは設定不可な項目をグレー表示に
-  $('[name=gamemode]').on('change', function(e) {
-    const gamemode = $('[name=gamemode]:checked').val();
-    gamemode_css(gamemode);
+  //[Apply to Editor] ボタンがクリックされたとき
+  $('#apply').on('click', function(e) {
+    const xgid = $('#xgid').val();
+    gamen_ni_hanei(xgid);
+    durty_analysis = durty_drawboard = true;
   });
 
-  //Diceが変更されたとき、反対側のダイスを更新
-  $('#dicef, #dicer').on('change', function(e) {
-    switch ( $(this).attr('id') ) {
-    case 'dicef':
-      $('#dicer').val( $(this).val() );
-      break;
-    case 'dicer':
-      $('#dicef').val( $(this).val() );
-      break;
-    }
-  });
-
-  //[change Rotation] ボタンがクリックされたとき
-  $('#alt-rotation').on('click', function(e) {
-    switch(rotation) {
-    case 'cw':
-      $('.rotation_rev').show(); $('.rotation_fwd').hide();
-      rotation = 'ccw'
-      break;
-    case 'cw':
-      $('.rotation_fwd').show(); $('.rotation_rev').hide();
-      rotation = 'cw'
-      break;
-    }
-    durty_drawboard = true;
-  });
-
-  //[Analyse] ボタンがクリックされたとき
-  $('#analyse').on('click', function(e) {
-    if (durty_analysis) {
-      const xgid = $("#xgid").val();
-      const depth = $("[name=depth]").val();
-      const num = $("#numofresults").val();
-      get_gnuanalysis_ajax(xgid, depth, num);
-    }
-    $('#analysisResult > .modalContents').css("max-width", "none");
-    $('#analysisResult').fadeIn();
-  });
-  //閉じるボタンクリック
-  $('#closeResult').on('click', function(e) {
-    $('#analysisResult').fadeOut();
+  //[XGID to Clipboard] ボタンがクリックされたとき
+  const clipboard = new ClipboardJS('#xgid2clip');
+  clipboard.on('success', function(e) {
+    e.clearSelection();
   });
 
   //[Clear Board] ボタンがクリックされたとき
@@ -494,10 +445,70 @@ $(function() {
     durty_analysis = durty_drawboard = true;
   });
 
-  //[Opening Board] ボタンがクリックされたとき
-  $('#openingboard').on('click', function(e) {
+  //[Opening Position] ボタンがクリックされたとき
+  $('#openingposition').on('click', function(e) {
     gamen_ni_hanei("XGID=-b----E-C---eE---c-e----B-:0:0:1:00:0:0:0:0:10");
     durty_analysis = durty_drawboard = true;
   });
+
+  //[Draw the Board] ボタンがクリックされたとき
+  $('#drawboard').on('click', function(e) {
+    const boardtype = get_boardtype();
+    if (durty_drawboard) {
+      const xgid = $('#xgid').val();
+      const xg = new Xgid(xgid);
+      if (!xg.isValid()) {
+        if (!confirm("\nNot a valid XGID '" + xgid + "'\nDo you force execution?")) {
+          return;
+        }
+      }
+      $(window).scrollTop(0); //html2canvas()で謎の空白が生じるのを防ぐため
+      make_htmlboard(xgid, boardtype, rotation); //rotationは広域変数から取得
+      make_xgfontboard(xgid, rotation);
+    }
+    if (boardtype == 'xg') {
+      $('#showimg').hide(); $('#showxgfont').show();
+    } else {
+      $('#showimg').show(); $('#showxgfont').hide();
+    }
+  });
+  $('#drawboard').funcHoverDiv({ //ボタンクリックでモーダルウィンドウを表示
+    hoverid:'#boardImg',      //擬似ウィンドウのID
+    dragid:'#boardImgHeader', //ドラッグ移動可能な要素のID
+    closeid:'#closeImg',      //擬似ウィンドウを閉じる要素のID
+    isModal: false,           //モーダル化
+    width:'472px',            //擬似ウィンドウのwidth
+    height:'480px'            //擬似ウィンドウのheight
+  });
+
+  //[Copy XgFont Board] ボタンがクリックされたとき
+  const xgfontboard = new ClipboardJS('#copy-xgfontboard');
+  xgfontboard.on('success', function(e) {
+    e.clearSelection();
+  });
+
+  //[Analyse] ボタンがクリックされたとき
+  $('#analyse').on('click', function(e) {
+    if (isGithub()) {
+      alert('Sorry, this feature is inactive.'); //githubで稼働しているときはgnubgの解析機能は営業停止
+      return;
+    }
+    if (durty_analysis) {
+      const xgid = $("#xgid").val();
+      const depth = $("[name=depth]").val();
+      const num = $("#numofresults").val();
+      get_gnuanalysis_ajax(xgid, depth, num);
+    }
+  });
+  if (!isGithub()) {
+    $('#analyse').funcHoverDiv({ //ボタンクリックでモーダルウィンドウを表示
+      hoverid:'#analysisResult',
+      dragid:'#analysisResultHeader',
+      closeid:'#closeResult',
+      isModal: false,
+      width:'40%',
+      height:'300px'
+    });
+  }
 
 }); //close to $(function() {
