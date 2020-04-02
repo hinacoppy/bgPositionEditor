@@ -316,7 +316,7 @@
 <tr><td>cube:</td>
 <td>
 <label><input type="radio" name="cubeowner" value="0" checked>center</label>
-<label><input type="radio" name="cubeowner" value="1">own</label>
+<label><input type="radio" name="cubeowner" value="1">me</label>
 <label><input type="radio" name="cubeowner" value="-1">opponent</label>
 &emsp;
 value: <select name="cubevalue">
@@ -336,7 +336,7 @@ value: <select name="cubevalue">
 <tr class="match_mode"><td>score:</td><td>
 <input type="number" id="score1" min="0" max="99" value="0"> -
 <input type="number" id="score2" min="0" max="99" value="0"> /
-<input type="number" id="matchlength" min="0" max="99" value="0"> &emsp; (own - opponent / length)</td></tr>
+<input type="number" id="matchlength" min="0" max="99" value="0"> &emsp; (me - opponent / length)</td></tr>
 <tr class="match_mode"><td>crawford:</td>
   <td><label><input type="radio" name="crawford" value="0" checked>no</label>
       <label><input type="radio" name="crawford" value="1">yes</label></td></tr>
@@ -347,7 +347,7 @@ value: <select name="cubevalue">
   <td><label><input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</label>
       <label><input type="radio" name="jacoby" value="3">jacoby,beaver(3)</label></td></tr>
 <tr><td>turn:</td>
-  <td><label><input type="radio" name="turn" value="1" checked>own</label>
+  <td><label><input type="radio" name="turn" value="1" checked>me</label>
       <label><input type="radio" name="turn" value="-1">opponent</label></td></tr>
 <tr><td>bearoff to:</td>
   <td><label><input type="radio" name="rotation" value="cw" checked>left</label>
@@ -367,8 +367,8 @@ value: <select name="cubevalue">
 <button id="openingposition">Opening Position</button> &nbsp;
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>export board:</td>
-<td><button id="drawboard">Draw the Board</button> &nbsp;
+<tr><td>export board: &nbsp;</td>
+<td><button id="drawboard">Draw the Board</button> &emsp;
 type:
 <label><input type="radio" name="boardtype" value="gnu" checked>GnuBG(white-brown)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="bw">GnuBG(black-white)</label> &nbsp;
