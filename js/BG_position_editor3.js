@@ -24,12 +24,12 @@ function gamen_ni_hanei(xgid) {
   $('#maxcube').val(maxcube);
   $('#position').val(pos);
   $('#maxcubeval').text('('+get_cubevaltext(maxcube)+')');
-  if (matchlen == 0) {
+  if (matchlen != 0) {
     $('[name=gamemode]').eq(0).prop('checked', true);
-    gamemode=$('[name=gamemode]').eq(0).val();
+    gamemode=$('[name=gamemode]').eq(0).val(); //matchgame
   } else {
     $('[name=gamemode]').eq(1).prop('checked', true);
-    gamemode=$('[name=gamemode]').eq(1).val();
+    gamemode=$('[name=gamemode]').eq(1).val(); //moneygame
   }
   if (gamemode == 'matchgame' && crawford != 0) {
     $('[name=crawford]').eq(1).prop('checked', true);
@@ -62,6 +62,7 @@ function gamen_ni_hanei(xgid) {
   gamemode_css(gamemode);
   turn_ni_hanei(turn);
   cube_wo_hyoji(cubeowner, cubeval, gamemode, crawford);
+  show_pip();
 }
 
 //turnによって表示を変更
@@ -122,6 +123,14 @@ function get_cubevaltext(cube) {
   return Math.pow(2, cube);
 }
 
+//Pipを計算し、表示する
+function show_pip() {
+  const xgstr = $('#xgid').val();
+  const xgid = new Xgid(xgstr);
+  const pipinfo = "Pips ★= " + xgid.get_pip(1) + " ▲= " + xgid.get_pip(-1);
+  $("#pipinfo").text(pipinfo);
+}
+
 //ベアオフの数を計算・表示する。負数の場合は警告(赤文字)
 function calc_boff(position) {
   let boffw = boffb = 15;
@@ -172,6 +181,7 @@ function edit_position(id) {
 
   draw_checker(pt, chnew);
   calc_boff(nextpos); //ベアオフを数える
+  show_pip();
 }
 
 //ポイントに駒を表示
@@ -274,10 +284,10 @@ function make_htmlboard(xgid, boardtype, rotation) {
   html.rotation = rotation;
   html.imgpath  = get_imgpath(boardtype);;
   const bgboard = html.get_board_html();
-  const pipinfo = html.get_pipinfo();
+//  const pipinfo = html.get_pipinfo();
   const bdwidth = html.get_bdwidth();
   $('#bgboard').show().html(bgboard).css("width", bdwidth);
-  $('#pipinfo').text(pipinfo);
+//  $('#pipinfo').text(pipinfo);
   setTimeout(function(){ draw_canvas(); }, 500); //show().html()が終わるのをしばらく待つ
   setTimeout(function(){ $('#bgboard').hide(); }, 2000); //draw_canvas()が終わったころに非表示にする
   durty_drawboard = false;
@@ -287,7 +297,14 @@ function make_htmlboard(xgid, boardtype, rotation) {
 function make_xgfontboard(xgid, rotation) {
   const xgboard = new XgFontBoard(xgid, rotation);
   const board = xgboard.get_xgfontboard();
-  $('#xgfontboard').val(board);
+  $('#xgfontboard').text(board);
+}
+
+//Textボードを生成
+function make_txtboard(xgid, rotation) {
+  const txtboard = new TextBoard(xgid, rotation);
+  const board = txtboard.get_txtboard();
+  $('#txtboard').text(board);
 }
 
 //html2canvasコマンドでHTML画像を一つのpng画像にまとめる
@@ -454,6 +471,10 @@ $(function() {
   //[Draw the Board] ボタンがクリックされたとき
   $('#drawboard').on('click', function(e) {
     const boardtype = get_boardtype();
+    if (isGithub() && boardtype == 'xg') {
+      alert('Sorry, this feature is inactive.'); //githubで稼働しているときはXGfontでの表示は営業停止
+      return;
+    }
     if (durty_drawboard) {
       const xgid = $('#xgid').val();
       const xg = new Xgid(xgid);
@@ -462,14 +483,28 @@ $(function() {
           return;
         }
       }
-      $(window).scrollTop(0); //html2canvas()で謎の空白が生じるのを防ぐため
-      make_htmlboard(xgid, boardtype, rotation); //rotationは広域変数から取得
-      make_xgfontboard(xgid, rotation);
+      switch(boardtype) {
+      case 'xg':
+        make_xgfontboard(xgid, rotation);
+        break;
+      case 'txt':
+        make_txtboard(xgid, rotation);
+        break;
+      case 'gnu':
+      case 'bw':
+      case 'iti':
+      default:
+        $(window).scrollTop(0); //html2canvas()で謎の空白が生じるのを防ぐため
+        make_htmlboard(xgid, boardtype, rotation); //rotationは広域変数から取得
+        break;
+      }
     }
     if (boardtype == 'xg') {
-      $('#showimg').hide(); $('#showxgfont').show();
+      $('#showimg').hide(); $('#showxgfont').show(); $('#showtxtboard').hide();
+    } else if (boardtype == 'txt') {
+      $('#showimg').hide(); $('#showxgfont').hide(); $('#showtxtboard').show();
     } else {
-      $('#showimg').show(); $('#showxgfont').hide();
+      $('#showimg').show(); $('#showxgfont').hide(); $('#showtxtboard').hide();
     }
   });
   $('#drawboard').funcHoverDiv({ //ボタンクリックでモーダルウィンドウを表示
@@ -484,6 +519,12 @@ $(function() {
   //[Copy XgFont Board] ボタンがクリックされたとき
   const xgfontboard = new ClipboardJS('#copy-xgfontboard');
   xgfontboard.on('success', function(e) {
+    e.clearSelection();
+  });
+
+  //[Copy Text Board] ボタンがクリックされたとき
+  const txtboard = new ClipboardJS('#copy-txtboard');
+  txtboard.on('success', function(e) {
     e.clearSelection();
   });
 
@@ -512,6 +553,7 @@ $(function() {
   }
   if (isGithub()) {
     $('#analysisResult').hide();
+    $('#xgfontboardtype').hide();
   }
 
 }); //close to $(function() {

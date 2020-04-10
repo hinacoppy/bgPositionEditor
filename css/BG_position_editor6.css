@@ -23,9 +23,9 @@ input{
   background-color:#fff;
 }
 .match_mode{
+  display:none; /* ゲームモード初期値は money game とし、match gameは初期非表示 */
 }
 .money_mode{
-  display:none; /* ゲームモード初期値は match game とし、money gameは初期非表示 */
 }
 .rotation_fwd{
 }

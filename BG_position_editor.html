@@ -5,6 +5,7 @@
 <meta name="description" content="Backgammon Position Editor in Browser">
 <meta name="author" content="(C)hinacoppy 2018 - 2020">
 <link rel="stylesheet" href="css/BG_position_editor6.css">
+</style>
 <title>BG Position Editor</title>
 </head>
 <body>
@@ -312,7 +313,8 @@
 </tr>
 </table>
 <table>
-<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td colspan="2">---------------------------------------------------------------
+&emsp;&emsp;&emsp;&emsp;<span id="pipinfo">Pips ★= 0 ▲= 0</span></td></tr>
 <tr><td>cube:</td>
 <td>
 <label><input type="radio" name="cubeowner" value="0" checked>center</label>
@@ -320,8 +322,7 @@
 <label><input type="radio" name="cubeowner" value="-1">opponent</label>
 &emsp;
 value: <select name="cubevalue">
-       <option value="0" selected>0</option>
-       <option value="0">1</option>
+       <option value="0" selected>1</option>
        <option value="1">2</option>
        <option value="2">4</option>
        <option value="3">8</option>
@@ -331,8 +332,8 @@ value: <select name="cubevalue">
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>game mode:</td>
-  <td><label><input type="radio" name="gamemode" value="matchgame" checked>match</label>
-      <label><input type="radio" name="gamemode" value="moneygame">unlimited</label></td></tr>
+  <td><label><input type="radio" name="gamemode" value="matchgame">match</label>
+      <label><input type="radio" name="gamemode" value="moneygame" checked>unlimited</label></td></tr>
 <tr class="match_mode"><td>score:</td><td>
 <input type="number" id="score1" min="0" max="99" value="0"> -
 <input type="number" id="score2" min="0" max="99" value="0"> /
@@ -373,8 +374,8 @@ type:
 <label><input type="radio" name="boardtype" value="gnu" checked>GnuBG(white-brown)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="bw">GnuBG(black-white)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="iti">Itikawa</label> &nbsp;
-<label><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
-<!-- <label><input type="radio" name="boardtype" value="txt">Text Board</label> &nbsp; <!-- Future implementation -->
+<label id="xgfontboardtype"><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
+<label><input type="radio" name="boardtype" value="txt">Text Board</label> &nbsp;
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>analysis:</td>
@@ -405,14 +406,17 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
     <button id="closeImg" class="closeModal">×</button>
   </div>
   <div class="modalBody">
-    <div id="pipinfo"></div>
     <div id="showimg">
       <img id="boardone" src=""><br>
       <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
     </div>
     <div id="showxgfont">
-      <textarea id="xgfontboard" rows="14" cols="16" class="eXtremeFont"></textarea><br>
+      <pre id="xgfontboard" rows="14" cols="16" class="eXtremeFont"></pre><br>
       <input type="button" id="copy-xgfontboard" data-clipboard-target="#xgfontboard" value="Copy XgFont Board">
+    </div>
+    <div id="showtxtboard">
+      <pre id="txtboard" rows="14" cols="50" class=""></pre><br>
+      <input type="button" id="copy-txtboard" data-clipboard-target="#txtboard" value="Copy Text Board">
     </div>
   </div>
 </section>
@@ -425,6 +429,7 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
 <script src="/js/BgXgid_class.js"></script>
 <script src="/js/BgHtmlBoard_class.js"></script>
 <script src="/js/BgXgFontBoard_class.js"></script>
+<script src="/js/BgTextBoard_class.js"></script>
 <script src="./js/BG_position_editor3.js"></script>
 <script src="./js/jquery.funcHoverDiv.js"></script>
 </body>
