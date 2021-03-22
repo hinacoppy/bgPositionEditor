@@ -376,6 +376,33 @@ function isGithub() {
   return (hostname.indexOf("hinacoppy.github.io") >= 0);
 }
 
+function reverse_xgid(xgid) {
+  const flipTurn = tn => (parseInt(tn) * -1).toString();  //関数変数を定義
+
+  const xg = xgid.split("=");
+  const s = xg[1].split(":");
+  const revpos = reverse_pos(s[0]);
+  const cubeown = flipTurn(s[2]); //cube owner
+  const turn = flipTurn(s[3]); //turn
+  const xgidout = 'XGID='+revpos+':'+s[1]+':'+cubeown+':'+turn+':'+s[4]+':'+s[6]+':'+s[5]+':'+s[7]+':'+s[8]+':'+s[9];
+  return xgidout;
+}
+
+function reverse_pos(pos) {
+  //関数変数を定義
+  const isLowerCase = str => str === str.toLowerCase();
+  const isUpperCase = str => str === str.toUpperCase();
+
+  let posrevout = '';
+  for(const c of pos.split('').reverse()) {
+    let d = c;
+    if (isLowerCase(c)) { d = c.toUpperCase(); }
+    if (isUpperCase(c)) { d = c.toLowerCase(); }
+    posrevout += d;
+  }
+  return posrevout;
+}
+
 //イベントハンドラの定義
 $(function() {
   //ゲームシチュエーションが変更されたときはxgidを編集
@@ -465,6 +492,13 @@ $(function() {
   //[Opening Position] ボタンがクリックされたとき
   $('#openingposition').on('click', function(e) {
     gamen_ni_hanei("XGID=-b----E-C---eE---c-e----B-:0:0:1:00:0:0:0:0:10");
+    durty_analysis = durty_drawboard = true;
+  });
+
+  //[Reverse Turn] ボタンがクリックされたとき
+  $('#reverseturn').on('click', function(e) {
+    revxgid = reverse_xgid($('#xgid').val());
+    gamen_ni_hanei(revxgid);
     durty_analysis = durty_drawboard = true;
   });
 
