@@ -586,8 +586,7 @@ $(function() {
     });
   }
   if (isGithub()) {
-    $('#analysisResult').hide();
-    $('#xgfontboardtype').hide();
+    $('.hidewhengithub').hide();
   }
 
 }); //close to $(function() {

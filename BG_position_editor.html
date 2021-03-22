@@ -374,11 +374,11 @@ type:
 <label><input type="radio" name="boardtype" value="gnu" checked>GnuBG(white-brown)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="bw">GnuBG(black-white)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="iti">Itikawa</label> &nbsp;
-<label id="xgfontboardtype"><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
+<label class="hidewhengithub"><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
 <label><input type="radio" name="boardtype" value="txt">Text Board</label> &nbsp;
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
-<tr><td>analysis:</td>
+<tr class="hidewhengithub"><td>analysis:</td>
   <td><button id="analyse">Analyse</button> &emsp;
       depth: <select name="depth">
       <option value="1">1</option>
@@ -386,12 +386,12 @@ type:
       <option value="3">3</option>
       <option value="4">4</option></select> &nbsp;
 num of results: <input type="number" id="numofresults" min="0" max="20" value="5"></td></tr>
-<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr class="hidewhengithub"><td colspan="2">---------------------------------------------------------------</td></tr>
 </table>
 <input type="hidden" id="position" value="--------------------------">
 </form>
 
-<section id="analysisResult" class="modalContainer">
+<section id="analysisResult" class="modalContainer hidewhengithub">
   <div id="analysisResultHeader" class="modalTitle">
     <span class="modalTitleText">Analysis Result</span>
     <button id="closeResult" class="closeModal">×</button>
