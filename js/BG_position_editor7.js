@@ -357,7 +357,7 @@ function get_boardtype() {
 }
 
 function get_imgpath(boardtype) {
-  const imgpath = {bw: '/img/bw/', iti: '/img/iti/', gnu: '/img/gnu/'};
+  const imgpath = {bw: 'img/bw/', iti: 'img/iti/', gnu: 'img/gnu/'};
   return imgpath[boardtype];
 }
 
