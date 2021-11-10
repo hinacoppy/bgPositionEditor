@@ -1,5 +1,6 @@
 // BG_position_editor 用 JavaScript
-// (C)hinacoppy 2018 -- 2020
+// (C)hinacoppy 2018 -- 2021
+'use strict';
 
 //広域変数
 var rotation = 'cw';
@@ -12,7 +13,7 @@ function gamen_ni_hanei(xgid) {
   const regexp = /XGID=(.+?):(.+?):(.+?):(.+?):(.+?):(.+?):(.+?):(.+?):(.+?):(.+?)$/;
   const z = xgidstr.match(regexp);
   const pos=z[1], cubeval=z[2], cubeowner=z[3], turn=z[4], dice=z[5],
-        sc1=z[6], sc2=z[7], jacoby=crawford=z[8], matchlen=z[9], maxcube=z[10];
+        sc1=z[6], sc2=z[7], jacoby=z[8], crawford=z[8], matchlen=z[9], maxcube=z[10];
   let gamemode;
 
   $('#xgid').val(xgidstr);
@@ -133,7 +134,8 @@ function show_pip() {
 
 //ベアオフの数を計算・表示する。負数の場合は警告(赤文字)
 function calc_boff(position) {
-  let boffw = boffb = 15;
+  let boffw = 15;
+  let boffb = 15;
   let n;
   const poslist = position.split('');
   for (let i=0; i<poslist.length; i++) {
@@ -199,7 +201,7 @@ function make_pt_str(pt, ch) {
   const nm = char2num(ch);
   const checker = nm > 0 ? "★" : "▲";
   const absnm = Math.abs(nm);
-  checker5 = (absnm >= 6) ? absnm : checker;
+  const checker5 = (absnm >= 6) ? absnm : checker;
 
   if (absnm == 0) { return ""; }
   if ((pt >= 13 && pt <= 24) || pt == 0) { //ボードの上半分
@@ -336,7 +338,7 @@ function disp_result_pre(d) {
 function get_gnuanalysis_ajax(xgid, depth, num) {
   $("#result").html("<img src='img/loading.gif'>");
   $.ajax({
-    url: 'gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num, //local PHP script
+    url: '/gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num, //local PHP script
 //    url: 'http://local.example.com:1234/gnubg_ajax.js?g='+xgid, //Node.js
 //    url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&n='+num,
 //    url: '/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&d='+depth+'&n='+num, //kagoya local
@@ -357,18 +359,8 @@ function get_boardtype() {
 }
 
 function get_imgpath(boardtype) {
-  switch(boardtype) {
-  case 'bw':
-    return 'img/bw/';
-    break;
-  case 'iti':
-    return 'img/iti/';
-    break;
-  case 'gnu':
-  default:
-    return 'img/gnu/';
-    break;
-  }
+  const imgpath = {bw: 'img/bw/', iti: 'img/iti/', gnu: 'img/gnu/'};
+  return imgpath[boardtype];
 }
 
 function isGithub() {
@@ -401,6 +393,48 @@ function reverse_pos(pos) {
     posrevout += d;
   }
   return posrevout;
+}
+
+//外部スクリプト(PHP)にPOSTするデータを組み立てる
+function makeFormData(categoryid, probnum, xgid) {
+    const postData = new FormData();
+    postData.append('categoryid', categoryid);
+    postData.append('probnum', probnum);
+    postData.append('xgid', xgid);
+    return postData;
+}
+
+//AJAX通信により、問題データを取得する
+function ajax_select(categoryid, probnum) {
+    $.ajax({
+        url: '/misc/problemid2xgid_json.php',
+        method: 'POST',
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        data: makeFormData(categoryid, probnum, "")
+    }).done(function(d) {
+        $('#xgid').val(d.xgid);
+        $('#apply').trigger('click');
+    }).fail(function() {
+        alert('データ取得に失敗しました');
+    });
+}
+
+//AJAX通信により、問題データをUpdateする
+function ajax_update(categoryid, probnum, xgid) {
+    $.ajax({
+        url: '/misc/updatedb_json.php',
+        method: 'POST',
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        data: makeFormData(categoryid, probnum, xgid)
+    }).done(function(d) {
+        $('#updateresult').text(d.message);
+    }).fail(function() {
+        alert('DB Updateに失敗しました');
+    });
 }
 
 //イベントハンドラの定義
@@ -483,6 +517,12 @@ $(function() {
     e.clearSelection();
   });
 
+//  $('#xgid2clip').on('click', function(e) {
+//    $('#xgid').select();
+//    document.execCommand("Copy"); //クリップボードにコピー
+//    window.getSelection().removeAllRanges(); //選択状態を解除
+//  });
+
   //[Clear Board] ボタンがクリックされたとき
   $('#clearboard').on('click', function(e) {
     gamen_ni_hanei(false);
@@ -497,7 +537,7 @@ $(function() {
 
   //[Reverse Turn] ボタンがクリックされたとき
   $('#reverseturn').on('click', function(e) {
-    revxgid = reverse_xgid($('#xgid').val());
+    const revxgid = reverse_xgid($('#xgid').val());
     gamen_ni_hanei(revxgid);
     durty_analysis = durty_drawboard = true;
   });
@@ -540,14 +580,21 @@ $(function() {
     } else {
       $('#showimg').show(); $('#showxgfont').hide(); $('#showtxtboard').hide();
     }
+    boardwindow.show();
   });
-  $('#drawboard').funcHoverDiv({ //ボタンクリックでモーダルウィンドウを表示
-    hoverid:'#boardImg',      //擬似ウィンドウのID
-    dragid:'#boardImgHeader', //ドラッグ移動可能な要素のID
-    closeid:'#closeImg',      //擬似ウィンドウを閉じる要素のID
-    isModal: false,           //モーダル化
-    width:'472px',            //擬似ウィンドウのwidth
-    height:'480px'            //擬似ウィンドウのheight
+
+  //[Draw the Board]で開くモーダルウィンドウを準備
+  const boardwindow = new FloatWindow({
+    hoverid:  '#boardImg',       //擬似ウィンドウのID
+    headid:   '#boardImgHeader', //ドラッグ移動可能な要素のID
+    bodyid:   '#boardImgBody',   //最小化(非表示)される部分
+    maxbtn:   '#maxBtn',         //擬似ウィンドウ最大化(再表示)
+    minbtn:   '#minBtn',         //擬似ウィンドウ最小化
+    closebtn: '#closeBtn',       //擬似ウィンドウを閉じる要素のID
+    left:     '900px',           //擬似ウィンドウの表示位置
+    top:      '30px',            //擬似ウィンドウの表示位置
+    width:    '472px',           //擬似ウィンドウのwidth
+    height:   '480px'            //擬似ウィンドウのheight
   });
 
   //[Copy XgFont Board] ボタンがクリックされたとき
@@ -574,17 +621,37 @@ $(function() {
       const num = $("#numofresults").val();
       get_gnuanalysis_ajax(xgid, depth, num);
     }
+    analysewindow.show();
   });
-  if (!isGithub()) {
-    $('#analyse').funcHoverDiv({ //ボタンクリックでモーダルウィンドウを表示
-      hoverid:'#analysisResult',
-      dragid:'#analysisResultHeader',
-      closeid:'#closeResult',
-      isModal: false,
-      width:'40%',
-      height:'300px'
-    });
-  }
+
+  //[Analyse]で開くモーダルウィンドウを準備
+  const analysewindow = new FloatWindow({
+    hoverid:  '#analysisResult',
+    headid:   '#analysisResultHeader',
+    bodyid:   '#analysisResultBody',
+    maxbtn:   '#maxBtnAnl',
+    minbtn:   '#minBtnAnl',
+    closebtn: '#closeBtnAnl',
+    width:    '40%',
+    height:   '300px'
+  });
+
+  //[Select DB] ボタンがクリックされたとき
+  $('#selectdb').on('click', function(e) {
+    const categoryid = $("#categoryid").val();
+    const probnum    = $("#probnum").val();
+    ajax_select(categoryid, probnum);
+  });
+
+  //[Update DB] ボタンがクリックされたとき
+  $('#updatedb').on('click', function(e) {
+    const categoryid = $("#categoryid").val();
+    const probnum    = $("#probnum").val();
+    const xgid       = $('#xgid').val();
+    ajax_update(categoryid, probnum, xgid);
+  });
+
+  //GitHubで使わない機能は非表示
   if (isGithub()) {
     $('.hidewhengithub').hide();
   }
