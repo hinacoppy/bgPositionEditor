@@ -4,15 +4,19 @@
 <meta charset="UTF-8">
 <meta name="description" content="Backgammon Position Editor in Browser">
 <meta name="author" content="(C)hinacoppy 2018 - 2021">
-<link rel="stylesheet" href="css/BG_position_editor7.css">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/BG_position_editor9.css">
+<link rel="stylesheet" href="/css/FloatWindow2.css">
+<link rel="icon" href="icon/favicon.ico">
+<link rel="apple-touch-icon" href="icon/apple-touch-icon.png">
 <title>BG Position Editor</title>
 </head>
 <body>
 <h3>BG Position Editor (only for PC with 2+ button mouse)</h3>
 
 <form id="BgEditor" onSubmit="return false;">
-<table class="rotation_fwd boardeditor" border="3" rules="cols">
-<tr align="center" class="turn0">
+<table class="rotation_fwd boardeditor">
+<tr class="turn0">
 <td>▲boff</td><td></td>
 <td class="bgc1">24</td>
 <td class="bgc2">23</td>
@@ -29,7 +33,7 @@
 <td class="bgc2">13</td>
 <td></td><td>Cube</td>
 </tr>
-<tr align="center" class="turn1">
+<tr class="turn1">
 <td>▲boff</td><td></td>
 <td class="bgc1">1</td>
 <td class="bgc2">2</td>
@@ -46,7 +50,7 @@
 <td class="bgc2">12</td>
 <td></td><td>Cube</td>
 </tr>
-<tr valign="top" align="center">
+<tr class="vtop">
 <td id="boff-wf">0</td>
 <td><br><br><br><br><br></td>
 <td id="p24f" class="bgc1 area"></td>
@@ -64,16 +68,16 @@
 <td id="p13f" class="bgc2 area"></td>
 <td><br><br><br><br><br></td><td id="cubef" rowspan="3"></td>
 </tr>
-<tr align="center">
+<tr>
 <td></td><td></td>
 <td colspan="6" class="bgc3 turn0"></td>
-<td colspan="6" class="bgc3 turn1" align="center">Dice: <input type="text" id="dice1" size="3" value="00" text-align="center"></td>
+<td colspan="6" class="bgc3 turn1">Dice: <input type="text" id="dice1" size="3" value="00"></td>
 <td></td>
 <td colspan="6" class="bgc3 turn1"></td>
-<td colspan="6" class="bgc3 turn0" align="center">Dice: <input type="text" id="dice2" size="3" value="00" text-align="center"></td>
+<td colspan="6" class="bgc3 turn0">Dice: <input type="text" id="dice2" size="3" value="00"></td>
 <td></td>
 </tr>
-<tr valign="bottom" align="center">
+<tr class="vbottom">
 <td id="boff-bf">0</td>
 <td><br><br><br><br><br></td>
 <td id="p01f" class="bgc2 area"></td>
@@ -91,7 +95,7 @@
 <td id="p12f" class="bgc1 area"></td>
 <td><br><br><br><br><br></td>
 </tr>
-<tr align="center" class="turn0">
+<tr class="turn0">
 <td>★boff</td><td></td>
 <td class="bgc2">1</td>
 <td class="bgc1">2</td>
@@ -108,7 +112,7 @@
 <td class="bgc1">12</td>
 <td></td><td></td>
 </tr>
-<tr align="center" class="turn1">
+<tr class="turn1">
 <td>★boff</td><td></td>
 <td class="bgc2">24</td>
 <td class="bgc1">23</td>
@@ -127,8 +131,8 @@
 </tr>
 </table>
 
-<table class="rotation_rev boardeditor" border="3" rules="cols">
-<tr align="center" class="turn0">
+<table class="rotation_rev boardeditor">
+<tr class="turn0">
 <td>Cube</td><td></td>
 <td class="bgc1">13</td>
 <td class="bgc2">14</td>
@@ -145,7 +149,7 @@
 <td class="bgc2">24</td>
 <td></td><td>▲boff</td>
 </tr>
-<tr align="center" class="turn1">
+<tr class="turn1">
 <td>Cube</td><td></td>
 <td class="bgc1">12</td>
 <td class="bgc2">11</td>
@@ -162,7 +166,7 @@
 <td class="bgc2">1</td>
 <td></td><td>▲boff</td>
 </tr>
-<tr valign="top" align="center">
+<tr class="vtop">
 <td id="cuber" rowspan="3"></td>
 <td><br><br><br><br><br></td>
 <td id="p13r" class="bgc1 area"></td>
@@ -181,16 +185,16 @@
 <td><br><br><br><br><br></td>
 <td id="boff-wr">0</td>
 </tr>
-<tr align="center">
+<tr>
 <td></td>
 <td colspan="6" class="bgc3 turn0"></td>
-<td colspan="6" class="bgc3 turn1" align="center">Dice: <input type="text" id="dice3" size="3" value="00" text-align="center"></td>
+<td colspan="6" class="bgc3 turn1">Dice: <input type="text" id="dice3" size="3" value="00"></td>
 <td></td>
 <td colspan="6" class="bgc3 turn1"></td>
-<td colspan="6" class="bgc3 turn0" align="center">Dice: <input type="text" id="dice4" size="3" value="00" text-align="center"></td>
+<td colspan="6" class="bgc3 turn0">Dice: <input type="text" id="dice4" size="3" value="00"></td>
 <td></td><td></td>
 </tr>
-<tr valign="bottom" align="center">
+<tr class="vbottom">
 <td><br><br><br><br><br></td>
 <td id="p12r" class="bgc2 area"></td>
 <td id="p11r" class="bgc1 area"></td>
@@ -208,7 +212,7 @@
 <td><br><br><br><br><br></td>
 <td id="boff-br">0</td>
 </tr>
-<tr align="center" class="turn0">
+<tr class="turn0">
 <td></td><td></td>
 <td class="bgc2">12</td>
 <td class="bgc1">11</td>
@@ -225,7 +229,7 @@
 <td class="bgc1">1</td>
 <td></td><td>★boff</td>
 </tr>
-<tr align="center" class="turn1">
+<tr class="turn1">
 <td></td><td></td>
 <td class="bgc2">13</td>
 <td class="bgc1">14</td>
@@ -245,13 +249,12 @@
 </table>
 <table>
 <tr><td colspan="2">---------------------------------------------------------------
-&emsp;&emsp;&emsp;&emsp;<span id="pipinfo">Pips ★= 0 ▲= 0</span></td></tr>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span id="pipinfo">Pips ★= 0 ▲= 0</span></td></tr>
 <tr><td>cube:</td>
 <td>
 <label><input type="radio" name="cubeowner" value="0" checked>center</label>
 <label><input type="radio" name="cubeowner" value="1">me</label>
-<label><input type="radio" name="cubeowner" value="-1">opponent</label>
-&emsp;
+<label><input type="radio" name="cubeowner" value="-1">opponent</label> &emsp;
 value: <select name="cubevalue">
        <option value="0" selected>1</option>
        <option value="1">2</option>
@@ -260,15 +263,19 @@ value: <select name="cubevalue">
        <option value="4">16</option>
        <option value="5">32</option>
        </select>
+&emsp;
+max cube:
+  <input type="number" id="maxcube" min="0" max="10" value="10">
+  <span id="maxcubeval">(1024)</span>
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>game mode:</td>
   <td><label><input type="radio" name="gamemode" value="matchgame">match</label>
       <label><input type="radio" name="gamemode" value="moneygame" checked>unlimited</label></td></tr>
-<tr class="match_mode"><td>score:</td><td>
-<input type="number" id="score1" min="0" max="99" value="0"> -
-<input type="number" id="score2" min="0" max="99" value="0"> /
-<input type="number" id="matchlength" min="0" max="99" value="0"> &emsp; (me - opponent / length)</td></tr>
+<tr class="match_mode"><td>score:</td>
+  <td><input type="number" id="score1" min="0" max="99" value="0"> -
+      <input type="number" id="score2" min="0" max="99" value="0"> /
+      <input type="number" id="matchlength" min="0" max="99" value="0"> &emsp; (me - opponent / length)</td></tr>
 <tr class="match_mode"><td>crawford:</td>
   <td><label><input type="radio" name="crawford" value="0" checked>no</label>
       <label><input type="radio" name="crawford" value="1">yes</label></td></tr>
@@ -284,9 +291,6 @@ value: <select name="cubevalue">
 <tr><td>bearoff to:</td>
   <td><label><input type="radio" name="rotation" value="cw" checked>left</label>
       <label><input type="radio" name="rotation" value="ccw">right</label></td></tr>
-<tr><td>max cube:</td>
-  <td><input type="number" id="maxcube" min="0" max="10" value="10">
-      <span id="maxcubeval">(1024)</span></td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr><td>xgid:</td>
     <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
@@ -306,8 +310,8 @@ type:
 <label><input type="radio" name="boardtype" value="gnu" checked>GnuBG(white-brown)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="bw">GnuBG(black-white)</label> &nbsp;
 <label><input type="radio" name="boardtype" value="iti">Itikawa</label> &nbsp;
-<label class="hidewhengithub"><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
 <label><input type="radio" name="boardtype" value="txt">Text Board</label> &nbsp;
+<label class="hidewhengithub"><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
 </td></tr>
 <tr><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr class="hidewhengithub"><td>analysis:</td>
@@ -320,11 +324,11 @@ type:
 num of results: <input type="number" id="numofresults" min="0" max="20" value="5"></td></tr>
 <tr class="hidewhengithub"><td colspan="2">---------------------------------------------------------------</td></tr>
 <tr class="hidewhengithub"><td>DB access:</td>
-  <td>categoryid: <input type="text" id="categoryid" size="3"> &nbsp;
-      probnum: <input type="text" id="probnum" size="2"></td></tr>
+  <td>categoryid: <input type="text" id="categoryid" size="3" value=""> &nbsp;
+      probnum: <input type="text" id="probnum" size="2" value=""></td></tr>
 <tr class="hidewhengithub"><td></td>
-  <td><button id="selectdb">Select DB</button> &nbsp;
-      <button id="updatedb">Update DB</button> &nbsp;
+  <td><button id="selectdb" title="SELECT xgid FROM position WHERE categoryid=? AND probnum=?">Select DB</button> &nbsp;
+      <button id="updatedb" title="UPDATE position SET xgid=? WHERE categoryid=? AND probnum=?">Update DB</button>
 </td></tr>
 <tr class="hidewhengithub"><td></td>
   <td><div id="updateresult"></div>
@@ -334,7 +338,7 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
 <input type="hidden" id="position" value="--------------------------">
 </form>
 
-<section id="analysisResult" class="modalContainer hidewhengithub">
+<aside id="analysisResult" class="modalContainer hidewhengithub">
   <div id="analysisResultHeader" class="modalTitle">
     <span class="modalTitleText">Analysis Result</span>
     <button id="maxBtnAnl">O</button><button id="minBtnAnl">_</button><button id="closeBtnAnl">X</button>
@@ -342,15 +346,15 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
   <div id="analysisResultBody" class="modalBody">
     <pre id="result"></pre>
   </div>
-</section>
-<section id="boardImg" class="modalContainer">
+</aside>
+<aside id="boardImg" class="modalContainer">
   <div id="boardImgHeader" class="modalTitle">
     <span class="modalTitleText">Board Image</span>
     <button id="maxBtn">O</button><button id="minBtn">_</button><button id="closeBtn">X</button>
   </div>
   <div id='boardImgBody' class="modalBody">
     <div id="showimg">
-      <img id="boardone" src=""><br>
+      <img id="boardone" src="" alt="board.png"><br>
       <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
     </div>
     <div id="showxgfont">
@@ -358,22 +362,22 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
       <input type="button" id="copy-xgfontboard" data-clipboard-target="#xgfontboard" value="Copy XgFont Board">
     </div>
     <div id="showtxtboard">
-      <pre id="txtboard" class="" style="margin:0px;"></pre><br>
+      <pre id="txtboard" class="txtboard" style="margin:0px;"></pre><br>
       <input type="button" id="copy-txtboard" data-clipboard-target="#txtboard" value="Copy Text Board">
     </div>
   </div>
-</section>
+</aside>
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
 
 
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="/js/clipboard.min.js"></script> <!-- version 2.0.6 -->
 <script src="/js/html2canvas.min.js"></script> <!-- version 1.0.0-rc.7 -->
-<script src="/js/jquery.funcHoverDiv2.js"></script>
+<script src="/js/FloatWindow2.js"></script>
 <script src="/js/BgXgid_class.js"></script>
 <script src="/js/BgHtmlBoard_class.js"></script>
 <script src="/js/BgXgFontBoard_class.js"></script>
 <script src="/js/BgTextBoard_class.js"></script>
-<script src="./js/BG_position_editor7.js"></script>
+<script src="js/BG_position_editor8.js"></script>
 </body>
 </html>

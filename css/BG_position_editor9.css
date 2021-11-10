@@ -24,9 +24,6 @@ input,select,button{
 .boardeditor input{
   text-align:center; /* ダイスは中央揃え */
 }
-.boardeditor button{
-  font-size:80%; /* Up/Downボタンは小さく */
-}
 .boardeditor .vtop{
   vertical-align:top; /* ボードの上半分は上寄せ */
 }
@@ -42,7 +39,7 @@ input,select,button{
 .bgc3{
   background-color:#fff;
 }
-.areaZZZ{
+.area{
   width:3em;
 }
 .match_mode{
