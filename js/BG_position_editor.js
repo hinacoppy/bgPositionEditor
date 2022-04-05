@@ -84,20 +84,21 @@ function cube_wo_hyoji(cubeown, cubeval, gamemode, crawford) {
 
   if (gamemode == 'matchgame' && crawford != 0) {
     cubestr = "Cr";
-    align = "middle";
+    align = "0";
   } else {
     cubestr = get_cubevaltext(cubeval);
     switch(cubeown) {
     case "0":
-      align = "middle"; break;
+      align = "0"; break;
     case "1":
-      align = "bottom"; break;
+      align = "1"; break;
     case "-1":
-      align = "top"; break;
+      align = "2"; break;
     }
   }
-  $('#cubef, #cuber').text('['+ cubestr +']');
-  $('#cubef, #cuber').attr("valign", align);
+  $(".cube").text("");
+  $('#cubef' + align).text('['+ cubestr +']');
+  $('#cuber' + align).text('['+ cubestr +']');
 }
 
 //ポジションの情報をボードエディタに反映
@@ -164,17 +165,31 @@ function calc_boff(position) {
   }
 }
 
+function get_checkercol(which) {
+  const editormode = $('[name=editorMode]:checked').val();
+  let checkercol = which;
+  if (editormode == "onebutton") {
+    const checkerColor = $('[name=checkerColor]:checked').val();
+    checkercol = parseInt(checkerColor);
+  }
+  const plusminus = 2 - checkercol; // 1(left click) ==> 1, 3(right click) ==> -1
+  return plusminus;
+}
+
 //クリックされたポイントと左右どちらのクリックかを元にポジションを編集
-function edit_position2(pt, delta) {
+function edit_position3(pt, num, plusminus) {
   const position = $('#position').val();
   const poslist = position.split('');
   const ch = poslist[pt];
-  const num = char2num(ch);
+  const numbf = char2num(ch);
 
-  if (pt ==  0 && num == 0 && delta ==  1) { return; } //バーのコマは増やせる方向が一方だけ
-  if (pt == 25 && num == 0 && delta == -1) { return; }
+  if (pt ==  0 && plusminus ==  1) { return; } //バーのコマは増やせる方向が一方だけ
+  if (pt == 25 && plusminus == -1) { return; }
 
-  const chnew = num2char(num + delta);
+  const numaf = (num == 5 && Math.abs(numbf) >= 5 && numbf * plusminus > 0) ? numbf + plusminus : num * plusminus;
+  //5の位置のクリックでは、同色で増やす方向のときは一つ増やす、別色の時は入れ替える
+
+  const chnew = num2char(numaf);
 
   poslist[pt] = chnew;
   const nextpos = poslist.join('');
@@ -188,44 +203,40 @@ function edit_position2(pt, delta) {
 
 //ポイントに駒を表示
 function draw_checker(pt, ch) {
-  const str = make_pt_str(pt, ch);
-  const col = select_col(ch);
-  const pts = ("00"+pt).substr(-2);
-  $('#p'+pts+"f").html(str).css("color", col);
-  $('#p'+pts+"r").html(str).css("color", col);
+  const num = char2num(ch);
+  const col = select_col(num);
+  const pts = ("00" + pt).slice(-2);
+  for (let p = 1; p <= 5; p++) {
+    $("#p" + pts + "f" + p).text("");
+    $("#p" + pts + "r" + p).text("");
+  }
+  for (let p = 1; p <= Math.abs(num); p++) {
+    const str = make_pt_str(p, num);
+    $("#p" + pts + "f" + p).text(str).css("color", col);
+    $("#p" + pts + "r" + p).text(str).css("color", col);
+  }
 }
 
 //ポイントに表示する駒
-function make_pt_str(pt, ch) {
-  let ptstr;
-  const nm = char2num(ch);
-  const checker = nm > 0 ? "★" : "▲";
-  const absnm = Math.abs(nm);
-  const checker5 = (absnm >= 6) ? absnm : checker;
-
-  if (absnm == 0) { return ""; }
-  if ((pt >= 13 && pt <= 24) || pt == 0) { //ボードの上半分
-    if (absnm >= 1) { ptstr = checker; }
-    if (absnm >= 2) { ptstr = ptstr + "<br>" + checker; }
-    if (absnm >= 3) { ptstr = ptstr + "<br>" + checker; }
-    if (absnm >= 4) { ptstr = ptstr + "<br>" + checker; }
-    if (absnm >= 5) { ptstr = ptstr + "<br>" + checker5;}
-  } else { //ボードの下半分
-    if (absnm >= 1) { ptstr = checker; }
-    if (absnm >= 2) { ptstr = checker + "<br>" + ptstr; }
-    if (absnm >= 3) { ptstr = checker + "<br>" + ptstr; }
-    if (absnm >= 4) { ptstr = checker + "<br>" + ptstr; }
-    if (absnm >= 5) { ptstr = checker5+ "<br>" + ptstr; }
+function make_pt_str(pos, num) {
+  let checker;
+  const absnm = Math.abs(num);
+  if (pos == 5 && absnm >= 6) {
+    checker = absnm;
+  } else if (num > 0) {
+    checker = "★";
+  } else if (num < 0) {
+    checker = "▲";
   }
-  return ptstr;
+  return checker;
 }
 
 //駒に色を付ける
-function select_col(c) {
+function select_col(num) {
   let col;
-  if ( c.match(/[A-Z]/) ) {
+  if (num > 0) {
     col="blue";
-  } else if ( c.match(/[a-z]/) ) {
+  } else if (num < 0) {
     col="red";
   } else {
     col="initial";
@@ -459,9 +470,10 @@ $(function() {
     if (id === undefined) { return; }
     if (e.which !== 1 && e.which !== 3) { return; }
 
-    const pt = Number(id.substr(1,2));
-    const delta = 2 - e.which; // 1(left click) ==> 1, 3(right click) ==> -1)
-    edit_position2(pt, delta);
+    const pt = parseInt(id.substring(1, 3)); //id="p17r2" -> 17
+    const num = parseInt(id.slice(-1)); //id="p07r2" -> 2
+    const plusminus = get_checkercol(e.which);
+    edit_position3(pt, num, plusminus);
   });
 
   //Diceが変更されたとき、別画面のダイスを更新
@@ -471,7 +483,7 @@ $(function() {
   });
 
   //キューブ状態が変更されたときはキューブを表示
-  $('[name=cubeowner], [name=cubevalue]').on('change', function(e) {
+  $('[name=cubeowner], [name=cubevalue], [name=crawford]').on('change', function(e) {
     const cubeval  = $('[name=cubevalue]').val();
     const cubeown  = $('[name=cubeowner]:checked').val();
     const gamemode = $('[name=gamemode]:checked').val();
@@ -643,6 +655,28 @@ $(function() {
     closebtn: '#closeBtnAnl',
     width:    '40%',
     height:   '300px'
+  });
+
+  //[SelectC]で開くモーダルウィンドウを準備
+  const checkerwindow = new FloatWindow({
+    hoverid:  '#checkerSelector',
+    headid:   '#checkerSelectorHeader',
+    bodyid:   'checkerSelectorBody',
+    maxbtn:   '#maxBtnCs',
+    minbtn:   '#minBtnCs',
+    closebtn: '#closeBtnCs',
+//    width:    '200px',
+    height:   '110px'
+  });
+
+  //editorModeが変更されたとき
+  $('[name=editorMode]').on('change', function(e) {
+    const editormode = $('[name=editorMode]:checked').val();
+    if (editormode == "onebutton") {
+      checkerwindow.show();
+    } else {
+      checkerwindow.hide();
+    }
   });
 
   //[Select DB] ボタンがクリックされたとき

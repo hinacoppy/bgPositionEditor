@@ -1,5 +1,11 @@
 /** BG_position_editor.css */
-
+/* document outline ----------------------------------------- */
+html{
+  overscroll-behavior:none; /* バウンススクロールを抑止(only for Android) */
+}
+body{
+  background-color:#efe;
+}
 input,select,button{
   font-size:100%;
 }
@@ -11,6 +17,7 @@ input,select,button{
   border-width:4px;
   border-style:solid;
   border-collapse:collapse;
+  cursor:default;
 }
 .boardeditor tr{
   text-align:center;
@@ -72,4 +79,30 @@ input,select,button{
 /* Text Board */
 .txtboard{
   font-size:1.2em;
+}
+/* Segmented Control ----------------------------------------- */
+/* (参考) https://ginpen.com/2012/12/11/segmented-control/ */
+.segmented{
+  display:inline-block;
+}
+.segmented .label,.mode{
+  border:1px solid;
+  float:left;
+  padding:0.5em 1em;
+  text-align:center;
+  width:5vw;
+  background-color:#eee;
+  border-color:#ccc;
+  color:#666;
+}
+.segmented input{
+  display:none;
+}
+.segmented input:checked + .label{
+  background-color:#ff0;
+  color:#fff;
+}
+.segmented input:checked + .mode{
+  background-color:#29f;
+  color:#fff;
 }

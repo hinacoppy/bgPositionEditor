@@ -1,13 +1,13 @@
 {
   "name": "Backgammon Position Editor in Browser",
   "short_name": "bgPositionEdtor",
-  "start_url": "/bgPositionEditor/forTwoButtonMouse.html",
+  "start_url": "/bgPositionEditor/index.html",
   "scope": "/bgPositionEditor/",
   "display": "fullscreen",
-  "background_color": "#aaa",
-  "theme_color": "#aaa",
+  "background_color": "#efe",
+  "theme_color": "#efe",
   "description": "バックギャモンポジションエディタ",
-  "copyright": "(C)hinacoppy 2021",
+  "copyright": "(C)hinacoppy 2021 - 2022",
   "orientation": "landscape",
   "icons": [{
     "src": "icon/favicon.ico",

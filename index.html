@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Backgammon Position Editor in Browser">
+<meta name="author" content="(C)hinacoppy 2018 - 2022">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/BG_position_editor.css">
+<link rel="stylesheet" href="/css/FloatWindow2.css">
+<link rel="icon" href="icon/favicon.ico">
+<link rel="apple-touch-icon" href="icon/apple-touch-icon.png">
+<title>Backgammon Position Editor</title>
+</head>
+<body>
+<h3>Backgammon Position Editor</h3>
+
+<div class="segmented">
+<label><input type="radio" name="editorMode" value="twobutton" checked><span class="mode">2 Button</span></label>
+<label><input type="radio" name="editorMode" value="onebutton"><span class="mode">Tablet</span</label>
+</div>
+
+<form id="BgEditor" onSubmit="return false;">
+<table class="rotation_fwd boardeditor">
+<tr class="turn0">
+<td>▲boff</td><td></td>
+<td id="p24f0" class="bgc1 area">24</td>
+<td id="p23f0" class="bgc2 area">23</td>
+<td id="p22f0" class="bgc1 area">22</td>
+<td id="p21f0" class="bgc2 area">21</td>
+<td id="p20f0" class="bgc1 area">20</td>
+<td id="p19f0" class="bgc2 area">19</td>
+<td id="p00f0" class="     area">bar</td>
+<td id="p18f0" class="bgc1 area">18</td>
+<td id="p17f0" class="bgc2 area">17</td>
+<td id="p16f0" class="bgc1 area">16</td>
+<td id="p15f0" class="bgc2 area">15</td>
+<td id="p14f0" class="bgc1 area">14</td>
+<td id="p13f0" class="bgc2 area">13</td>
+<td></td><td>Cube</td>
+</tr>
+<tr class="turn1">
+<td>▲boff</td><td></td>
+<td id="q24f0" class="bgc1 area">1</td>
+<td id="q23f0" class="bgc2 area">2</td>
+<td id="q22f0" class="bgc1 area">3</td>
+<td id="q21f0" class="bgc2 area">4</td>
+<td id="q20f0" class="bgc1 area">5</td>
+<td id="q19f0" class="bgc2 area">6</td>
+<td id="q00f0" class="     area">bar</td>
+<td id="q18f0" class="bgc1 area">7</td>
+<td id="q17f0" class="bgc2 area">8</td>
+<td id="q16f0" class="bgc1 area">9</td>
+<td id="q15f0" class="bgc2 area">10</td>
+<td id="q14f0" class="bgc1 area">11</td>
+<td id="q13f0" class="bgc2 area">12</td>
+<td></td><td>Cube</td>
+</tr>
+<tr class="vtop">
+<td id="boff-wf">0</td><td></td>
+<td id="p24f1" class="bgc1 area"></td>
+<td id="p23f1" class="bgc2 area"></td>
+<td id="p22f1" class="bgc1 area"></td>
+<td id="p21f1" class="bgc2 area"></td>
+<td id="p20f1" class="bgc1 area"></td>
+<td id="p19f1" class="bgc2 area"></td>
+<td id="p00f1" class="     area"></td>
+<td id="p18f1" class="bgc1 area"></td>
+<td id="p17f1" class="bgc2 area"></td>
+<td id="p16f1" class="bgc1 area"></td>
+<td id="p15f1" class="bgc2 area"></td>
+<td id="p14f1" class="bgc1 area"></td>
+<td id="p13f1" class="bgc2 area"></td>
+<td></td><td id="cubef2" class="cube"></td>
+</tr>
+<tr class="vtop">
+<td>&ensp;</td><td></td>
+<td id="p24f2" class="bgc1 area"></td>
+<td id="p23f2" class="bgc2 area"></td>
+<td id="p22f2" class="bgc1 area"></td>
+<td id="p21f2" class="bgc2 area"></td>
+<td id="p20f2" class="bgc1 area"></td>
+<td id="p19f2" class="bgc2 area"></td>
+<td id="p00f2" class="     area"></td>
+<td id="p18f2" class="bgc1 area"></td>
+<td id="p17f2" class="bgc2 area"></td>
+<td id="p16f2" class="bgc1 area"></td>
+<td id="p15f2" class="bgc2 area"></td>
+<td id="p14f2" class="bgc1 area"></td>
+<td id="p13f2" class="bgc2 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vtop">
+<td>&ensp;</td><td></td>
+<td id="p24f3" class="bgc1 area"></td>
+<td id="p23f3" class="bgc2 area"></td>
+<td id="p22f3" class="bgc1 area"></td>
+<td id="p21f3" class="bgc2 area"></td>
+<td id="p20f3" class="bgc1 area"></td>
+<td id="p19f3" class="bgc2 area"></td>
+<td id="p00f3" class="     area"></td>
+<td id="p18f3" class="bgc1 area"></td>
+<td id="p17f3" class="bgc2 area"></td>
+<td id="p16f3" class="bgc1 area"></td>
+<td id="p15f3" class="bgc2 area"></td>
+<td id="p14f3" class="bgc1 area"></td>
+<td id="p13f3" class="bgc2 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vtop">
+<td>&ensp;</td><td></td>
+<td id="p24f4" class="bgc1 area"></td>
+<td id="p23f4" class="bgc2 area"></td>
+<td id="p22f4" class="bgc1 area"></td>
+<td id="p21f4" class="bgc2 area"></td>
+<td id="p20f4" class="bgc1 area"></td>
+<td id="p19f4" class="bgc2 area"></td>
+<td id="p00f4" class="     area"></td>
+<td id="p18f4" class="bgc1 area"></td>
+<td id="p17f4" class="bgc2 area"></td>
+<td id="p16f4" class="bgc1 area"></td>
+<td id="p15f4" class="bgc2 area"></td>
+<td id="p14f4" class="bgc1 area"></td>
+<td id="p13f4" class="bgc2 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vtop">
+<td>&ensp;</td><td></td>
+<td id="p24f5" class="bgc1 area"></td>
+<td id="p23f5" class="bgc2 area"></td>
+<td id="p22f5" class="bgc1 area"></td>
+<td id="p21f5" class="bgc2 area"></td>
+<td id="p20f5" class="bgc1 area"></td>
+<td id="p19f5" class="bgc2 area"></td>
+<td id="p00f5" class="     area"></td>
+<td id="p18f5" class="bgc1 area"></td>
+<td id="p17f5" class="bgc2 area"></td>
+<td id="p16f5" class="bgc1 area"></td>
+<td id="p15f5" class="bgc2 area"></td>
+<td id="p14f5" class="bgc1 area"></td>
+<td id="p13f5" class="bgc2 area"></td>
+<td></td><td></td>
+</tr>
+<tr>
+<td></td><td></td>
+<td colspan="6" class="bgc3 turn0"></td>
+<td colspan="6" class="bgc3 turn1">Dice: <input type="text" id="dice1" size="3" value="00"></td>
+<td></td>
+<td colspan="6" class="bgc3 turn1"></td>
+<td colspan="6" class="bgc3 turn0">Dice: <input type="text" id="dice2" size="3" value="00"></td>
+<td></td><td id="cubef0" class="cube"></td>
+</tr>
+<tr class="vbottom">
+<td>&ensp;</td><td></td>
+<td id="p01f5" class="bgc2 area"></td>
+<td id="p02f5" class="bgc1 area"></td>
+<td id="p03f5" class="bgc2 area"></td>
+<td id="p04f5" class="bgc1 area"></td>
+<td id="p05f5" class="bgc2 area"></td>
+<td id="p06f5" class="bgc1 area"></td>
+<td id="p25f5" class="     area"></td>
+<td id="p07f5" class="bgc2 area"></td>
+<td id="p08f5" class="bgc1 area"></td>
+<td id="p09f5" class="bgc2 area"></td>
+<td id="p10f5" class="bgc1 area"></td>
+<td id="p11f5" class="bgc2 area"></td>
+<td id="p12f5" class="bgc1 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vbottom">
+<td>&ensp;</td><td></td>
+<td id="p01f4" class="bgc2 area"></td>
+<td id="p02f4" class="bgc1 area"></td>
+<td id="p03f4" class="bgc2 area"></td>
+<td id="p04f4" class="bgc1 area"></td>
+<td id="p05f4" class="bgc2 area"></td>
+<td id="p06f4" class="bgc1 area"></td>
+<td id="p25f4" class="     area"></td>
+<td id="p07f4" class="bgc2 area"></td>
+<td id="p08f4" class="bgc1 area"></td>
+<td id="p09f4" class="bgc2 area"></td>
+<td id="p10f4" class="bgc1 area"></td>
+<td id="p11f4" class="bgc2 area"></td>
+<td id="p12f4" class="bgc1 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vbottom">
+<td>&ensp;</td><td></td>
+<td id="p01f3" class="bgc2 area"></td>
+<td id="p02f3" class="bgc1 area"></td>
+<td id="p03f3" class="bgc2 area"></td>
+<td id="p04f3" class="bgc1 area"></td>
+<td id="p05f3" class="bgc2 area"></td>
+<td id="p06f3" class="bgc1 area"></td>
+<td id="p25f3" class="     area"></td>
+<td id="p07f3" class="bgc2 area"></td>
+<td id="p08f3" class="bgc1 area"></td>
+<td id="p09f3" class="bgc2 area"></td>
+<td id="p10f3" class="bgc1 area"></td>
+<td id="p11f3" class="bgc2 area"></td>
+<td id="p12f3" class="bgc1 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vbottom">
+<td>&ensp;</td><td></td>
+<td id="p01f2" class="bgc2 area"></td>
+<td id="p02f2" class="bgc1 area"></td>
+<td id="p03f2" class="bgc2 area"></td>
+<td id="p04f2" class="bgc1 area"></td>
+<td id="p05f2" class="bgc2 area"></td>
+<td id="p06f2" class="bgc1 area"></td>
+<td id="p25f2" class="     area"></td>
+<td id="p07f2" class="bgc2 area"></td>
+<td id="p08f2" class="bgc1 area"></td>
+<td id="p09f2" class="bgc2 area"></td>
+<td id="p10f2" class="bgc1 area"></td>
+<td id="p11f2" class="bgc2 area"></td>
+<td id="p12f2" class="bgc1 area"></td>
+<td></td><td></td>
+</tr>
+<tr class="vbottom">
+<td id="boff-bf">0</td><td></td>
+<td id="p01f1" class="bgc2 area"></td>
+<td id="p02f1" class="bgc1 area"></td>
+<td id="p03f1" class="bgc2 area"></td>
+<td id="p04f1" class="bgc1 area"></td>
+<td id="p05f1" class="bgc2 area"></td>
+<td id="p06f1" class="bgc1 area"></td>
+<td id="p25f1" class="     area"></td>
+<td id="p07f1" class="bgc2 area"></td>
+<td id="p08f1" class="bgc1 area"></td>
+<td id="p09f1" class="bgc2 area"></td>
+<td id="p10f1" class="bgc1 area"></td>
+<td id="p11f1" class="bgc2 area"></td>
+<td id="p12f1" class="bgc1 area"></td>
+<td></td><td id="cubef1" class="cube"></td>
+</tr>
+<tr class="turn0">
+<td>★boff</td><td></td>
+<td id="p01f0" class="bgc2 area">1</td>
+<td id="p02f0" class="bgc1 area">2</td>
+<td id="p03f0" class="bgc2 area">3</td>
+<td id="p04f0" class="bgc1 area">4</td>
+<td id="p05f0" class="bgc2 area">5</td>
+<td id="p06f0" class="bgc1 area">6</td>
+<td id="p25f0" class="     area">bar</td>
+<td id="p07f0" class="bgc2 area">7</td>
+<td id="p08f0" class="bgc1 area">8</td>
+<td id="p09f0" class="bgc2 area">9</td>
+<td id="p10f0" class="bgc1 area">10</td>
+<td id="p11f0" class="bgc2 area">11</td>
+<td id="p12f0" class="bgc1 area">12</td>
+<td></td><td></td>
+</tr>
+<tr class="turn1">
+<td>★boff</td><td></td>
+<td id="q01f0" class="bgc2 area">24</td>
+<td id="q02f0" class="bgc1 area">23</td>
+<td id="q03f0" class="bgc2 area">22</td>
+<td id="q04f0" class="bgc1 area">21</td>
+<td id="q05f0" class="bgc2 area">20</td>
+<td id="q06f0" class="bgc1 area">19</td>
+<td id="q25r0" class="     area">bar</td>
+<td id="q07f0" class="bgc2 area">18</td>
+<td id="q08f0" class="bgc1 area">17</td>
+<td id="q09f0" class="bgc2 area">16</td>
+<td id="q10f0" class="bgc1 area">15</td>
+<td id="q11f0" class="bgc2 area">14</td>
+<td id="q12f0" class="bgc1 area">13</td>
+<td></td><td></td>
+</tr>
+</table>
+
+<table class="rotation_rev boardeditor">
+<tr class="turn0">
+<td>Cube</td><td></td>
+<td id="p13r0" class="bgc1 area">13</td>
+<td id="p14r0" class="bgc2 area">14</td>
+<td id="p15r0" class="bgc1 area">15</td>
+<td id="p16r0" class="bgc2 area">16</td>
+<td id="p17r0" class="bgc1 area">17</td>
+<td id="p18r0" class="bgc2 area">18</td>
+<td id="p00r0" class="     area">bar</td>
+<td id="p19r0" class="bgc1 area">19</td>
+<td id="p20r0" class="bgc2 area">20</td>
+<td id="p21r0" class="bgc1 area">21</td>
+<td id="p22r0" class="bgc2 area">22</td>
+<td id="p23r0" class="bgc1 area">23</td>
+<td id="p24r0" class="bgc2 area">24</td>
+<td></td><td>▲boff</td>
+</tr>
+<tr class="turn1">
+<td>Cube</td><td></td>
+<td id="q13r0" class="bgc1 area">12</td>
+<td id="q14r0" class="bgc2 area">11</td>
+<td id="q15r0" class="bgc1 area">10</td>
+<td id="q16r0" class="bgc2 area">9</td>
+<td id="q17r0" class="bgc1 area">8</td>
+<td id="q18r0" class="bgc2 area">7</td>
+<td id="q00r0" class="     area">bar</td>
+<td id="q19r0" class="bgc1 area">6</td>
+<td id="q20r0" class="bgc2 area">5</td>
+<td id="q21r0" class="bgc1 area">4</td>
+<td id="q22r0" class="bgc2 area">3</td>
+<td id="q23r0" class="bgc1 area">2</td>
+<td id="q24r0" class="bgc2 area">1</td>
+<td></td><td>▲boff</td>
+</tr>
+<tr class="vtop">
+<td id="cuber2" class="cube"></td><td></td>
+<td id="p13r1" class="bgc1 area"></td>
+<td id="p14r1" class="bgc2 area"></td>
+<td id="p15r1" class="bgc1 area"></td>
+<td id="p16r1" class="bgc2 area"></td>
+<td id="p17r1" class="bgc1 area"></td>
+<td id="p18r1" class="bgc2 area"></td>
+<td id="p00r1" class="     area"></td>
+<td id="p19r1" class="bgc1 area"></td>
+<td id="p20r1" class="bgc2 area"></td>
+<td id="p21r1" class="bgc1 area"></td>
+<td id="p22r1" class="bgc2 area"></td>
+<td id="p23r1" class="bgc1 area"></td>
+<td id="p24r1" class="bgc2 area"></td>
+<td></td><td id="boff-wr">0</td>
+</tr>
+<tr class="vtop">
+<td></td><td></td>
+<td id="p13r2" class="bgc1 area"></td>
+<td id="p14r2" class="bgc2 area"></td>
+<td id="p15r2" class="bgc1 area"></td>
+<td id="p16r2" class="bgc2 area"></td>
+<td id="p17r2" class="bgc1 area"></td>
+<td id="p18r2" class="bgc2 area"></td>
+<td id="p00r2" class="     area"></td>
+<td id="p19r2" class="bgc1 area"></td>
+<td id="p20r2" class="bgc2 area"></td>
+<td id="p21r2" class="bgc1 area"></td>
+<td id="p22r2" class="bgc2 area"></td>
+<td id="p23r2" class="bgc1 area"></td>
+<td id="p24r2" class="bgc2 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vtop">
+<td></td><td></td>
+<td id="p13r3" class="bgc1 area"></td>
+<td id="p14r3" class="bgc2 area"></td>
+<td id="p15r3" class="bgc1 area"></td>
+<td id="p16r3" class="bgc2 area"></td>
+<td id="p17r3" class="bgc1 area"></td>
+<td id="p18r3" class="bgc2 area"></td>
+<td id="p00r3" class="     area"></td>
+<td id="p19r3" class="bgc1 area"></td>
+<td id="p20r3" class="bgc2 area"></td>
+<td id="p21r3" class="bgc1 area"></td>
+<td id="p22r3" class="bgc2 area"></td>
+<td id="p23r3" class="bgc1 area"></td>
+<td id="p24r3" class="bgc2 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vtop">
+<td></td><td></td>
+<td id="p13r4" class="bgc1 area"></td>
+<td id="p14r4" class="bgc2 area"></td>
+<td id="p15r4" class="bgc1 area"></td>
+<td id="p16r4" class="bgc2 area"></td>
+<td id="p17r4" class="bgc1 area"></td>
+<td id="p18r4" class="bgc2 area"></td>
+<td id="p00r4" class="     area"></td>
+<td id="p19r4" class="bgc1 area"></td>
+<td id="p20r4" class="bgc2 area"></td>
+<td id="p21r4" class="bgc1 area"></td>
+<td id="p22r4" class="bgc2 area"></td>
+<td id="p23r4" class="bgc1 area"></td>
+<td id="p24r4" class="bgc2 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vtop">
+<td></td><td></td>
+<td id="p13r5" class="bgc1 area"></td>
+<td id="p14r5" class="bgc2 area"></td>
+<td id="p15r5" class="bgc1 area"></td>
+<td id="p16r5" class="bgc2 area"></td>
+<td id="p17r5" class="bgc1 area"></td>
+<td id="p18r5" class="bgc2 area"></td>
+<td id="p00r5" class="     area"></td>
+<td id="p19r5" class="bgc1 area"></td>
+<td id="p20r5" class="bgc2 area"></td>
+<td id="p21r5" class="bgc1 area"></td>
+<td id="p22r5" class="bgc2 area"></td>
+<td id="p23r5" class="bgc1 area"></td>
+<td id="p24r5" class="bgc2 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr>
+<td id="cuber0" class="cube"></td><td></td>
+<td colspan="6" class="bgc3 turn0"></td>
+<td colspan="6" class="bgc3 turn1">Dice: <input type="text" id="dice3" size="3" value="00"></td>
+<td></td>
+<td colspan="6" class="bgc3 turn1"></td>
+<td colspan="6" class="bgc3 turn0">Dice: <input type="text" id="dice4" size="3" value="00"></td>
+<td></td><td></td>
+</tr>
+<tr class="vbottom">
+<td></td><td></td>
+<td id="p12r5" class="bgc2 area"></td>
+<td id="p11r5" class="bgc1 area"></td>
+<td id="p10r5" class="bgc2 area"></td>
+<td id="p09r5" class="bgc1 area"></td>
+<td id="p08r5" class="bgc2 area"></td>
+<td id="p07r5" class="bgc1 area"></td>
+<td id="p25r5" class="     area"></td>
+<td id="p06r5" class="bgc2 area"></td>
+<td id="p05r5" class="bgc1 area"></td>
+<td id="p04r5" class="bgc2 area"></td>
+<td id="p03r5" class="bgc1 area"></td>
+<td id="p02r5" class="bgc2 area"></td>
+<td id="p01r5" class="bgc1 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vbottom">
+<td></td><td></td>
+<td id="p12r4" class="bgc2 area"></td>
+<td id="p11r4" class="bgc1 area"></td>
+<td id="p10r4" class="bgc2 area"></td>
+<td id="p09r4" class="bgc1 area"></td>
+<td id="p08r4" class="bgc2 area"></td>
+<td id="p07r4" class="bgc1 area"></td>
+<td id="p25r4" class="     area"></td>
+<td id="p06r4" class="bgc2 area"></td>
+<td id="p05r4" class="bgc1 area"></td>
+<td id="p04r4" class="bgc2 area"></td>
+<td id="p03r4" class="bgc1 area"></td>
+<td id="p02r4" class="bgc2 area"></td>
+<td id="p01r4" class="bgc1 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vbottom">
+<td></td><td></td>
+<td id="p12r3" class="bgc2 area"></td>
+<td id="p11r3" class="bgc1 area"></td>
+<td id="p10r3" class="bgc2 area"></td>
+<td id="p09r3" class="bgc1 area"></td>
+<td id="p08r3" class="bgc2 area"></td>
+<td id="p07r3" class="bgc1 area"></td>
+<td id="p25r3" class="     area"></td>
+<td id="p06r3" class="bgc2 area"></td>
+<td id="p05r3" class="bgc1 area"></td>
+<td id="p04r3" class="bgc2 area"></td>
+<td id="p03r3" class="bgc1 area"></td>
+<td id="p02r3" class="bgc2 area"></td>
+<td id="p01r3" class="bgc1 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vbottom">
+<td></td><td></td>
+<td id="p12r2" class="bgc2 area"></td>
+<td id="p11r2" class="bgc1 area"></td>
+<td id="p10r2" class="bgc2 area"></td>
+<td id="p09r2" class="bgc1 area"></td>
+<td id="p08r2" class="bgc2 area"></td>
+<td id="p07r2" class="bgc1 area"></td>
+<td id="p25r2" class="     area"></td>
+<td id="p06r2" class="bgc2 area"></td>
+<td id="p05r2" class="bgc1 area"></td>
+<td id="p04r2" class="bgc2 area"></td>
+<td id="p03r2" class="bgc1 area"></td>
+<td id="p02r2" class="bgc2 area"></td>
+<td id="p01r2" class="bgc1 area"></td>
+<td></td><td>&ensp;</td>
+</tr>
+<tr class="vbottom">
+<td id="cuber1" class="cube"></td><td></td>
+<td id="p12r1" class="bgc2 area"></td>
+<td id="p11r1" class="bgc1 area"></td>
+<td id="p10r1" class="bgc2 area"></td>
+<td id="p09r1" class="bgc1 area"></td>
+<td id="p08r1" class="bgc2 area"></td>
+<td id="p07r1" class="bgc1 area"></td>
+<td id="p25r1" class="     area"></td>
+<td id="p06r1" class="bgc2 area"></td>
+<td id="p05r1" class="bgc1 area"></td>
+<td id="p04r1" class="bgc2 area"></td>
+<td id="p03r1" class="bgc1 area"></td>
+<td id="p02r1" class="bgc2 area"></td>
+<td id="p01r1" class="bgc1 area"></td>
+<td></td><td id="boff-br">0</td>
+</tr>
+<tr class="turn0">
+<td></td><td></td>
+<td id="p12r0" class="bgc2 area">12</td>
+<td id="p11r0" class="bgc1 area">11</td>
+<td id="p10r0" class="bgc2 area">10</td>
+<td id="p09r0" class="bgc1 area">9</td>
+<td id="p08r0" class="bgc2 area">8</td>
+<td id="p07r0" class="bgc1 area">7</td>
+<td id="p25r0" class="     area">bar</td>
+<td id="p06r0" class="bgc2 area">6</td>
+<td id="p05r0" class="bgc1 area">5</td>
+<td id="p04r0" class="bgc2 area">4</td>
+<td id="p03r0" class="bgc1 area">3</td>
+<td id="p02r0" class="bgc2 area">2</td>
+<td id="p01r0" class="bgc1 area">1</td>
+<td></td><td>★boff</td>
+</tr>
+<tr class="turn1">
+<td></td><td></td>
+<td id="q12r0" class="bgc2 area">13</td>
+<td id="q11r0" class="bgc1 area">14</td>
+<td id="q10r0" class="bgc2 area">15</td>
+<td id="q09r0" class="bgc1 area">16</td>
+<td id="q98r0" class="bgc2 area">17</td>
+<td id="q07r0" class="bgc1 area">18</td>
+<td id="q25r0" class="     area">bar</td>
+<td id="q06r0" class="bgc2 area">19</td>
+<td id="q05r0" class="bgc1 area">20</td>
+<td id="q04r0" class="bgc2 area">21</td>
+<td id="q03r0" class="bgc1 area">22</td>
+<td id="q02r0" class="bgc2 area">23</td>
+<td id="q01r0" class="bgc1 area">24</td>
+<td></td><td>★boff</td>
+</tr>
+</table>
+<table>
+<tr><td colspan="2">---------------------------------------------------------------
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span id="pipinfo">Pips ★= 0 ▲= 0</span></td></tr>
+<tr><td>cube:</td>
+<td>
+<label><input type="radio" name="cubeowner" value="0" checked>center</label>
+<label><input type="radio" name="cubeowner" value="1">me</label>
+<label><input type="radio" name="cubeowner" value="-1">opponent</label> &emsp;
+value: <select name="cubevalue">
+       <option value="0" selected>1</option>
+       <option value="1">2</option>
+       <option value="2">4</option>
+       <option value="3">8</option>
+       <option value="4">16</option>
+       <option value="5">32</option>
+       </select>
+&emsp;
+max cube:
+  <input type="number" id="maxcube" min="0" max="10" value="10">
+  <span id="maxcubeval">(1024)</span>
+</td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>game mode:</td>
+  <td><label><input type="radio" name="gamemode" value="matchgame">match</label>
+      <label><input type="radio" name="gamemode" value="moneygame" checked>unlimited</label></td></tr>
+<tr class="match_mode"><td>score:</td>
+  <td><input type="number" id="score1" min="0" max="99" value="0"> -
+      <input type="number" id="score2" min="0" max="99" value="0"> /
+      <input type="number" id="matchlength" min="0" max="99" value="0"> &emsp; (me - opponent / length)</td></tr>
+<tr class="match_mode"><td>crawford:</td>
+  <td><label><input type="radio" name="crawford" value="0" checked>no</label>
+      <label><input type="radio" name="crawford" value="1">yes</label></td></tr>
+<tr class="money_mode"><td>jacoby rule:</td>
+  <td><label><input type="radio" name="jacoby" value="0" checked>no jacoby,no beaver(0)</label>
+      <label><input type="radio" name="jacoby" value="1">jacoby,no beaver(1)</label></td></tr>
+<tr class="money_mode"><td></td>
+  <td><label><input type="radio" name="jacoby" value="2">no jacoby,beaver(2)</label>
+      <label><input type="radio" name="jacoby" value="3">jacoby,beaver(3)</label></td></tr>
+<tr><td>turn:</td>
+  <td><label><input type="radio" name="turn" value="1" checked>me</label>
+      <label><input type="radio" name="turn" value="-1">opponent</label></td></tr>
+<tr><td>bearoff to:</td>
+  <td><label><input type="radio" name="rotation" value="cw" checked>left</label>
+      <label><input type="radio" name="rotation" value="ccw">right</label></td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>xgid:</td>
+    <td><input type="text" id="xgid" size="53" value="XGID=--------------------------:0:0:1:00:0:0:0:0:10"></td></tr>
+<tr><td></td>
+<td>
+<button id="erase">Erase</button> &nbsp;
+<button id="apply">Apply to Editor</button> &nbsp;
+<button id="xgid2clip" data-clipboard-target="#xgid">XGID to Clipboard</button> &nbsp;
+<button id="clearboard">Clear Board</button> &nbsp;
+<button id="openingposition">Opening Position</button> &nbsp;
+<button id="reverseturn">Reverse Turn</button> &nbsp;
+</td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr><td>export board: &nbsp;</td>
+<td><button id="drawboard">Draw the Board</button> &emsp;
+type:
+<label><input type="radio" name="boardtype" value="gnu" checked>GnuBG(white-brown)</label> &nbsp;
+<label><input type="radio" name="boardtype" value="bw">GnuBG(black-white)</label> &nbsp;
+<label><input type="radio" name="boardtype" value="iti">Itikawa</label> &nbsp;
+<label><input type="radio" name="boardtype" value="txt">Text Board</label> &nbsp;
+<label class="hidewhengithub"><input type="radio" name="boardtype" value="xg">XgFont</label> &nbsp;
+</td></tr>
+<tr><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr class="hidewhengithub"><td>analysis:</td>
+  <td><button id="analyse">Analyse</button> &emsp;
+      depth: <select name="depth">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option></select> &nbsp;
+num of results: <input type="number" id="numofresults" min="0" max="20" value="5"></td></tr>
+<tr class="hidewhengithub"><td colspan="2">---------------------------------------------------------------</td></tr>
+<tr class="hidewhengithub"><td>DB access:</td>
+  <td>categoryid: <input type="text" id="categoryid" size="3" value=""> &nbsp;
+      probnum: <input type="text" id="probnum" size="2" value=""></td></tr>
+<tr class="hidewhengithub"><td></td>
+  <td><button id="selectdb" title="SELECT xgid FROM position WHERE categoryid=? AND probnum=?">Select DB</button> &nbsp;
+      <button id="updatedb" title="UPDATE position SET xgid=? WHERE categoryid=? AND probnum=?">Update DB</button>
+</td></tr>
+<tr class="hidewhengithub"><td></td>
+  <td><div id="updateresult"></div>
+</td></tr>
+<tr class="hidewhengithub"><td colspan="2">---------------------------------------------------------------</td></tr>
+</table>
+<input type="hidden" id="position" value="--------------------------">
+</form>
+
+<aside id="analysisResult" class="modalContainer hidewhengithub">
+  <div id="analysisResultHeader" class="modalTitle">
+    <span class="modalTitleText">Analysis Result</span>
+    <button id="maxBtnAnl">O</button><button id="minBtnAnl">_</button><button id="closeBtnAnl">X</button>
+  </div>
+  <div id="analysisResultBody" class="modalBody">
+    <pre id="result"></pre>
+  </div>
+</aside>
+<aside id="boardImg" class="modalContainer">
+  <div id="boardImgHeader" class="modalTitle">
+    <span class="modalTitleText">Board Image</span>
+    <button id="maxBtn">O</button><button id="minBtn">_</button><button id="closeBtn">X</button>
+  </div>
+  <div id='boardImgBody' class="modalBody">
+    <div id="showimg">
+      <img id="boardone" src="" alt="board.png"><br>
+      <a id="downloadimg" href="" download="board.png"><button id="download">download IMG</button></a>
+    </div>
+    <div id="showxgfont">
+      <pre id="xgfontboard" class="eXtremeFont" style="margin:0px;"></pre><br>
+      <input type="button" id="copy-xgfontboard" data-clipboard-target="#xgfontboard" value="Copy XgFont Board">
+    </div>
+    <div id="showtxtboard">
+      <pre id="txtboard" class="txtboard" style="margin:0px;"></pre><br>
+      <input type="button" id="copy-txtboard" data-clipboard-target="#txtboard" value="Copy Text Board">
+    </div>
+  </div>
+</aside>
+<div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
+
+<aside id="checkerSelector" class="modalContainer">
+  <div id="checkerSelectorHeader" class="modalTitle">
+    <span class="modalTitleText">Checker Selector</span>
+<!--
+    <button id="maxBtnCs">O</button><button id="minBtnCs">_</button><button id="closeBtnCs">X</button>
+-->
+  </div>
+  <div id="heckerSelectorBody" class="modalBody segmented">
+    <label><input type="radio" name="checkerColor" value="1" checked><span class="label" style="color:blue">★</span></label>
+    <label><input type="radio" name="checkerColor" value="3"><span class="label" style="color:red">▲</span></label>
+  </div>
+</aside>
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/clipboard.min.js"></script> <!-- version 2.0.6 -->
+<script src="/js/html2canvas.min.js"></script> <!-- version 1.0.0-rc.7 -->
+<script src="/js/FloatWindow2.js"></script>
+<script src="/js/BgUtil_class.js"></script>
+<script src="/js/BgXgid_class.js"></script>
+<script src="/js/BgHtmlBoard_class.js"></script>
+<script src="/js/BgXgFontBoard_class.js"></script>
+<script src="/js/BgTextBoard_class.js"></script>
+<script src="js/BG_position_editor.js"></script>
+</body>
+</html>
