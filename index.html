@@ -18,6 +18,11 @@
 <label><input type="radio" name="editorMode" value="twobutton" checked><span class="mode">2 Button</span></label>
 <label><input type="radio" name="editorMode" value="onebutton"><span class="mode">Tablet</span</label>
 </div>
+&emsp;&emsp;&emsp;
+<div id="checkerwindow" class="segmented">
+<label><input type="radio" name="checkerColor" value="1" checked><span class="label" style="color:blue">★</span></label>
+<label><input type="radio" name="checkerColor" value="3"><span class="label" style="color:red">▲</span></label>
+</div>
 
 <form id="BgEditor" onSubmit="return false;">
 <table class="rotation_fwd boardeditor">
@@ -640,19 +645,6 @@ num of results: <input type="number" id="numofresults" min="0" max="20" value="5
   </div>
 </aside>
 <div id="bgboard" style="line-height:1px;"></div> <!-- 画像部品を隙間なく並べる -->
-
-<aside id="checkerSelector" class="modalContainer">
-  <div id="checkerSelectorHeader" class="modalTitle">
-    <span class="modalTitleText">Checker Selector</span>
-<!--
-    <button id="maxBtnCs">O</button><button id="minBtnCs">_</button><button id="closeBtnCs">X</button>
--->
-  </div>
-  <div id="heckerSelectorBody" class="modalBody segmented">
-    <label><input type="radio" name="checkerColor" value="1" checked><span class="label" style="color:blue">★</span></label>
-    <label><input type="radio" name="checkerColor" value="3"><span class="label" style="color:red">▲</span></label>
-  </div>
-</aside>
 
 
 <script src="/js/jquery-3.6.0.min.js"></script>

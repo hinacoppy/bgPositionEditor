@@ -1,5 +1,5 @@
 // BG_position_editor 用 JavaScript
-// (C)hinacoppy 2018 -- 2021
+// (C)hinacoppy 2018 -- 2022
 'use strict';
 
 //広域変数
@@ -207,10 +207,6 @@ function draw_checker(pt, ch) {
   const col = select_col(num);
   const pts = ("00" + pt).slice(-2);
   for (let p = 1; p <= 5; p++) {
-    $("#p" + pts + "f" + p).text("");
-    $("#p" + pts + "r" + p).text("");
-  }
-  for (let p = 1; p <= Math.abs(num); p++) {
     const str = make_pt_str(p, num);
     $("#p" + pts + "f" + p).text(str).css("color", col);
     $("#p" + pts + "r" + p).text(str).css("color", col);
@@ -219,27 +215,27 @@ function draw_checker(pt, ch) {
 
 //ポイントに表示する駒
 function make_pt_str(pos, num) {
-  let checker;
+  let str;
   const absnm = Math.abs(num);
-  if (pos == 5 && absnm >= 6) {
-    checker = absnm;
+  if (pos > absnm) {
+    str = " ";
+  } else if (pos == 5 && absnm >= 6) {
+    str = absnm;
   } else if (num > 0) {
-    checker = "★";
+    str = "★";
   } else if (num < 0) {
-    checker = "▲";
+    str = "▲";
   }
-  return checker;
+  return str;
 }
 
 //駒に色を付ける
 function select_col(num) {
-  let col;
+  let col = "initial"; //num == 0
   if (num > 0) {
-    col="blue";
+    col = "blue";
   } else if (num < 0) {
-    col="red";
-  } else {
-    col="initial";
+    col = "red";
   }
   return col;
 }
@@ -657,26 +653,14 @@ $(function() {
     height:   '300px'
   });
 
-  //[SelectC]で開くモーダルウィンドウを準備
-  const checkerwindow = new FloatWindow({
-    hoverid:  '#checkerSelector',
-    headid:   '#checkerSelectorHeader',
-    bodyid:   'checkerSelectorBody',
-    maxbtn:   '#maxBtnCs',
-    minbtn:   '#minBtnCs',
-    closebtn: '#closeBtnCs',
-//    width:    '200px',
-    height:   '110px'
-  });
+  $("#checkerwindow").hide(); //初期状態は非表示
+//  const editormode = $('[name=editorMode]:checked').val();
+//  $("#checkerwindow").toggle(editormode == "onebutton"); //初期状態は非表示
 
   //editorModeが変更されたとき
   $('[name=editorMode]').on('change', function(e) {
     const editormode = $('[name=editorMode]:checked').val();
-    if (editormode == "onebutton") {
-      checkerwindow.show();
-    } else {
-      checkerwindow.hide();
-    }
+    $("#checkerwindow").toggle(editormode == "onebutton");
   });
 
   //[Select DB] ボタンがクリックされたとき
