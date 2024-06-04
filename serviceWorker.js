@@ -2,7 +2,7 @@
 // (参考) https://developer.mozilla.org/ja/docs/Web/Progressive_web_apps/Offline_Service_workers
 'use strict';
 
-const cacheName = 'bgPositionEdtor-v20220405';
+const cacheName = 'bgPositionEdtor-v20240105';
 const ORIGIN = (location.hostname == 'localhost') ? '' : location.protocol + '//' + location.hostname;
 
 const contentToCache = [
@@ -15,10 +15,11 @@ const contentToCache = [
   ORIGIN + '/bgPositionEdtor/icon/android-chrome-192x192.png',
   ORIGIN + '/bgPositionEdtor/icon/android-chrome-512x512.png',
   ORIGIN + '/bgPositionEdtor/css/BG_position_editor.css',
-  ORIGIN + '/js/jquery-3.6.0.min.js',
+  ORIGIN + '/css/FloatWindow4.css',
+  ORIGIN + '/js/jquery-3.7.1.min.js',
   ORIGIN + '/js/clipboard.min.js',
   ORIGIN + '/js/html2canvas.min.js',
-  ORIGIN + '/js/FloatWindow2.js',
+  ORIGIN + '/js/FloatWindow4.js',
   ORIGIN + '/js/BgUtil_class.js',
   ORIGIN + '/js/BgXgid_class.js',
   ORIGIN + '/js/BgHtmlBoard_class.js',

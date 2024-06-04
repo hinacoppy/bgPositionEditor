@@ -615,15 +615,23 @@ $(function() {
   });
 
   //[Copy XgFont Board] ボタンがクリックされたとき
-  const xgfontboard = new ClipboardJS('#copy-xgfontboard');
-  xgfontboard.on('success', function(e) {
-    e.clearSelection();
+  $('#copy-xgfontboard').on('click', function(e) {
+    $("#boardImg").attr("draggable", false); //clipboardJS実行時にdraggableが悪さするので一時的に停止させる
+    const xgfontboard = new ClipboardJS('#copy-xgfontboard');
+    xgfontboard.on('success', function(e) {
+      e.clearSelection();
+      $("#boardImg").attr("draggable", true);
+    });
   });
 
   //[Copy Text Board] ボタンがクリックされたとき
-  const txtboard = new ClipboardJS('#copy-txtboard');
-  txtboard.on('success', function(e) {
-    e.clearSelection();
+  $('#copy-txtboard').on('click', function(e) {
+    $("#boardImg").attr("draggable", false); //clipboardJS実行時にdraggableが悪さするので一時的に停止させる
+    const txtboard = new ClipboardJS('#copy-txtboard');
+    txtboard.on('success', function(e) {
+      e.clearSelection();
+      $("#boardImg").attr("draggable", true);
+    });
   });
 
   //[Analyse] ボタンがクリックされたとき
